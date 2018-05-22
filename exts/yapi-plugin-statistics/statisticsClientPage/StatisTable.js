@@ -9,17 +9,17 @@ const columns = [
     key: 'name'
   },
   {
-    title: '项目',
+    title: 'Project',
     dataIndex: 'project',
     key: 'project'
   },
   {
-    title: '接口',
+    title: 'API',
     dataIndex: 'interface',
     key: 'interface'
   },
   {
-    title: 'mock数据',
+    title: 'mock data',
     dataIndex: 'mock',
     key: 'mock'
   }
@@ -27,12 +27,12 @@ const columns = [
 
 const StatisTable = (props) => {
   const {dataSource} = props;
-    return ( 
+    return (
       <div className="m-row-table">
-        <h3 className="statis-title">分组数据详情</h3>
+        <h3 className="statis-title">Details</h3>
         <Table className="statis-table" pagination={false} dataSource={dataSource} columns={columns} />
       </div>
-    ) 
+    )
 }
 
 StatisTable.propTypes = {

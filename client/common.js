@@ -124,7 +124,7 @@ exports.handlePath = (path) => {
 
 exports.handleApiPath = (path) => {
   if (!path) return '';
-  path = trim(path);  
+  path = trim(path);
   path = path[0] !== '/' ? '/' + path : path;
   return path;
 }
@@ -145,9 +145,9 @@ exports.nameLengthLimit = (type) => {
     validator(rule, value, callback) {
       const len = value ? strLength(value) : 0;
       if (len > constants.NAME_LIMIT) {
-        callback('请输入' + type + '名称，长度不超过' + constants.NAME_LIMIT + '字符(中文算作2字符)!');
+        callback('Please enter ' + type + ' name, length less than ' + constants.NAME_LIMIT + ' characters');
       } else if (len === 0) {
-        callback('请输入' + type + '名称，长度不超过' + constants.NAME_LIMIT + '字符(中文算作2字符)!');
+        callback('Please enter ' + type + ' name, length less than ' + constants.NAME_LIMIT + ' characters');
       } else {
         return callback();
       }
@@ -171,7 +171,7 @@ exports.getMockText = (mockTpl) => {
   }catch(err){
     return ''
   }
-  
+
 }
 
 /**
@@ -194,7 +194,7 @@ exports.safeAssign = (Obj, nextObj) => {
 
 // 交换数组的位置
 exports.arrayChangeIndex = (arr, start, end) => {
-  
+
   let newArr = [].concat(arr);
   // newArr[start] = arr[end];
   // newArr[end] = arr[start];
@@ -202,7 +202,7 @@ exports.arrayChangeIndex = (arr, start, end) => {
   newArr.splice(start, 1);
   // end自动加1
   newArr.splice(end, 0, startItem)
-  
+
   let changes = [];
   newArr.forEach((item, index) => {
     changes.push({

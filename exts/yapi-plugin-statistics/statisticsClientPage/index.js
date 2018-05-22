@@ -16,8 +16,8 @@ const CountOverview = (props) => (
   <Row type="flex" justify="space-start" className="m-row">
     <Col className="gutter-row" span={6}>
       <span>
-        分组总数
-        <Tooltip placement="rightTop" title="统计yapi中一共开启了多少可见的公共分组">
+        Total Groups
+        <Tooltip placement="rightTop" title="Total public group number">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -26,8 +26,8 @@ const CountOverview = (props) => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        项目总数
-        <Tooltip placement="rightTop" title="统计yapi中建立的所有项目总数">
+        Total Projects
+        <Tooltip placement="rightTop" title="Total project number">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -35,8 +35,8 @@ const CountOverview = (props) => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        接口总数
-        <Tooltip placement="rightTop" title="统计yapi所有项目中的所有接口总数">
+        Total APIs
+        <Tooltip placement="rightTop" title="Total API number">
           {/*<a href="javascript:void(0)" className="m-a-help">?</a>*/}
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
@@ -45,8 +45,8 @@ const CountOverview = (props) => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        测试接口总数
-        <Tooltip placement="rightTop" title="统计yapi所有项目中的所有测试接口总数">
+        Total Test APIs
+        <Tooltip placement="rightTop" title="Total test API number">
           {/*<a href="javascript:void(0)" className="m-a-help">?</a>*/}
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
@@ -62,11 +62,11 @@ CountOverview.propTypes = {
 
 const StatusOverview = (props) => (
   <Row type="flex" justify="space-start" className="m-row">
-    
+
     <Col className="gutter-row" span={6}>
       <span>
-        操作系统类型
-        <Tooltip placement="rightTop" title="操作系统类型,返回值有'darwin', 'freebsd', 'linux', 'sunos' , 'win32'">
+        Operating System
+        <Tooltip placement="rightTop" title="System type, can be 'darwin', 'freebsd', 'linux', 'sunos' , 'win32'">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -74,8 +74,8 @@ const StatusOverview = (props) => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        cpu负载
-        <Tooltip placement="rightTop" title="cpu的总负载情况">
+        cpu
+        <Tooltip placement="rightTop" title="cpu status">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -83,8 +83,8 @@ const StatusOverview = (props) => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        系统空闲内存总量 / 内存总量
-        <Tooltip placement="rightTop" title="统计yapi所有项目中的所有测试接口总数">
+        System spare RAM / Total RAM
+        <Tooltip placement="rightTop" title="RAM usage">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -92,8 +92,8 @@ const StatusOverview = (props) => (
     </Col>
     <Col className="gutter-row" span={6}>
       <span>
-        邮箱状态
-        <Tooltip placement="rightTop" title="检测配置文件中配置邮箱的状态">
+        Email status
+        <Tooltip placement="rightTop" title="Email status in config">
           <Icon className="m-help" type="question-circle" />
         </Tooltip>
       </span>
@@ -139,7 +139,7 @@ class statisticsPage extends Component {
   }
 
   async componentWillMount() {
-    this.props.setBreadcrumb([{ name: '系统信息' }]);
+    this.props.setBreadcrumb([{ name: 'System Info' }]);
     this.getStatisData();
     this.getSystemStatusData();
     this.getGroupData();
@@ -183,8 +183,8 @@ class statisticsPage extends Component {
     }
   }
 
-    
-    
+
+
 
 
 
@@ -194,11 +194,11 @@ class statisticsPage extends Component {
     return (
       <div className="g-statistic">
         <div className="content">
-          <h2 className="title">系统状况</h2>
+          <h2 className="title">System Status</h2>
           <div className="system-content">
             <StatusOverview data={status}></StatusOverview>
           </div>
-          <h2 className="title">数据统计</h2>
+          <h2 className="title">Statistics</h2>
           <div>
             <CountOverview date={count}/>
             <StatisTable dataSource={dataTotal}/>

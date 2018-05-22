@@ -64,7 +64,7 @@ export default class Srch extends Component{
                     value={`${item.groupName}`}
                     id={`${item._id}`}
                   >
-                    {`分组: ${item.groupName}`}
+                    {`Group: ${item.groupName}`}
                   </Option>) :
                   (<Option
                     key={`${item._id}`}
@@ -72,16 +72,16 @@ export default class Srch extends Component{
                     value={`${item._id}`}
                     id={`${item._id}`}
                   >
-                    {`项目: ${item.name}`}
+                    {`Project: ${item.name}`}
                   </Option>)
-              ) 
+              )
             })
           }
           this.setState({
             dataSource: dataSource
           });
         }else{
-          console.log("查询项目或分组失败");
+          console.log("Search project/group failed");
         }
       })
       .catch((err) => {
@@ -113,7 +113,7 @@ export default class Srch extends Component{
         >
           <Input
             prefix={<Icon type="search" className="srch-icon" />}
-            placeholder="搜索分组/项目"
+            placeholder="Search group/project"
             className="search-input"
           />
         </AutoComplete>

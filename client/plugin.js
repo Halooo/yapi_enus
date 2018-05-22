@@ -160,10 +160,10 @@ hooks = {
   /*
    * 添加 reducer
    * @param Object reducerModules
-   * 
+   *
    * @info
-   * importDataModule = {}; 
-   * 
+   * importDataModule = {};
+   *
    */
 
   add_reducer: {
@@ -174,9 +174,9 @@ hooks = {
 };
 
 function bindHook(name, listener) {
-  if (!name) throw new Error('缺少hookname');
+  if (!name) throw new Error('missing hookname');
   if (name in hooks === false) {
-    throw new Error('不存在的hookname');
+    throw new Error('hookname does not exist');
   }
   if (hooks[name].mulit === true) {
     hooks[name].listener.push(listener);
@@ -187,7 +187,7 @@ function bindHook(name, listener) {
 }
 
 function emitHook(name, ...args) {
-  if (!hooks[name]) throw new Error('不存在的hook name');
+  if (!hooks[name]) throw new Error('hook name does not exist');
   let hook = hooks[name];
   if (hook.mulit === true && hook.type === 'listener') {
     if (Array.isArray(hook.listener)) {
