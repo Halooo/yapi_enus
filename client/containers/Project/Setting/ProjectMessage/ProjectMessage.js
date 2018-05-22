@@ -313,8 +313,7 @@ class ProjectMessage extends Component {
             <FormItem
               {...formItemLayout}
               label={
-                <span>
-                    {`Base path`}&nbsp;
+                <span>{`Base path`}&nbsp;
                   <Tooltip title="base url as root if left blank">
                     <Icon type="question-circle-o" />
                   </Tooltip>
@@ -336,7 +335,7 @@ class ProjectMessage extends Component {
               {...formItemLayout}
               label={
                 <span>
-                  MOCK地址&nbsp;
+                  MOCK path&nbsp;
                   <Tooltip title="see documentation for details">
                     <Icon type="question-circle-o" />
                   </Tooltip>

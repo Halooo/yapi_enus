@@ -8,9 +8,9 @@ const interfaceColModel = require('../models/interfaceCol.js');
 const interfaceCaseModel = require('../models/interfaceCase.js');
 
 const rolename = {
-  owner: "组长",
-  dev: "开发者",
-  guest: "访客"
+  owner: "Group Owner",
+  dev: "Developer",
+  guest: "Guest"
 };
 
 class groupController extends baseController {
@@ -35,7 +35,7 @@ class groupController extends baseController {
       minItems: 1
     }
 
-    
+
 
     this.schemaMap = {
       get: {
@@ -104,7 +104,7 @@ class groupController extends baseController {
     result = result.toObject();
     result.role = await this.getProjectRole(params.id, 'group');
     if (result.type === 'private') {
-      result.group_name = '个人空间';
+      result.group_name = 'Personal Space';
     }
     ctx.body = yapi.commons.resReturn(result);
   }
@@ -129,7 +129,7 @@ class groupController extends baseController {
     }
 
     let owners = [];
-   
+
     if (params.owner_uids) {
       for (let i = 0, len = params.owner_uids.length; i < len; i++) {
         let id = params.owner_uids[i]
@@ -148,7 +148,7 @@ class groupController extends baseController {
       return ctx.body = yapi.commons.resReturn(null, 401, '项目分组名已存在');
     }
 
-    
+
 
     let data = {
       group_name: params.group_name,
@@ -163,7 +163,7 @@ class groupController extends baseController {
     result = yapi.commons.fieldSelect(result, ['_id', 'group_name', 'group_desc', 'uid', 'members', 'type']);
     let username = this.getUsername();
     yapi.commons.saveLog({
-      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 新增了分组 <a href="/group/${result._id}">${params.group_name}</a>`,
+      content: `<a href="/user/profile/${this.getUid()}">${username}</a> Created new group <a href="/group/${result._id}">${params.group_name}</a>`,
       type: 'group',
       uid: this.getUid(),
       username: username,
@@ -240,7 +240,7 @@ class groupController extends baseController {
       })
       members = members.join("、");
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 新增了分组成员 ${members} 为 ${rolename[params.role]}`,
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> added new member ${members} as ${rolename[params.role]}`,
         type: 'group',
         uid: this.getUid(),
         username: username,
@@ -289,7 +289,7 @@ class groupController extends baseController {
 
     let groupUserdata = await this.getUserdata(params.member_uid, params.role);
     yapi.commons.saveLog({
-      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更改了分组成员 <a href="/user/profile/${params.member_uid}">${groupUserdata.username}</a> 的权限为 "${rolename[params.role]}"`,
+      content: `<a href="/user/profile/${this.getUid()}">${username}</a> changed member <a href="/user/profile/${params.member_uid}">${groupUserdata.username}</a> 's role to "${rolename[params.role]}"`,
       type: 'group',
       uid: this.getUid(),
       username: username,
@@ -346,7 +346,7 @@ class groupController extends baseController {
 
     let groupUserdata = await this.getUserdata(params.member_uid, params.role);
     yapi.commons.saveLog({
-      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 删除了分组成员 <a href="/user/profile/${params.member_uid}">${groupUserdata.username}</a>`,
+      content: `<a href="/user/profile/${this.getUid()}">${username}</a> deleted group member <a href="/user/profile/${params.member_uid}">${groupUserdata.username}</a>`,
       type: 'group',
       uid: this.getUid(),
       username: username,
@@ -407,7 +407,7 @@ class groupController extends baseController {
     }
     if (privateGroup) {
       privateGroup = privateGroup.toObject();
-      privateGroup.group_name = '个人空间';
+      privateGroup.group_name = 'Personal Space';
       privateGroup.role = 'owner';
       newResult.unshift(privateGroup);
     }
@@ -477,7 +477,7 @@ class groupController extends baseController {
     let result = await groupInst.up(params.id, params);
     let username = this.getUsername();
     yapi.commons.saveLog({
-      content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了 <a href="/group/${params.id}">${params.group_name}</a> 分组`,
+      content: `<a href="/user/profile/${this.getUid()}">${username}</a> updated <a href="/group/${params.id}">${params.group_name}</a> group`,
       type: 'group',
       uid: this.getUid(),
       username: username,

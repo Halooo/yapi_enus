@@ -59,7 +59,7 @@ class ErrMsg extends Component {
           break;
         case 'noProject':
           title = 'There is no project in this group yet';
-          desc = <span>please click "new project" button on the top right corner</span>;
+          desc = <span>{`please click "new project" button on the top right corner`}</span>;
           break;
         case 'noData':
           title = 'No data yet';

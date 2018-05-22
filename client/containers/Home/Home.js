@@ -153,9 +153,9 @@ const HomeGuest = () => (
           </Col>
           <Col lg={17} xs={14} className="section-card manage-word">
             <Icon type="team" className="icon" />
-            <h3 className="title">Flattened management model</h3>
-            <p className="desc">Easy to access for all members</p>
-            <p className="desc">The Super Admin -> Group owner -> Member management model is well designed</p>
+            <h3 className="title">{`Flattened management model`}</h3>
+            <p className="desc">{`Easy to access for all members`}</p>
+            <p className="desc">{`The Super Admin -> Group owner -> Member management model is well designed`}</p>
           </Col>
         </Row>
       </div>

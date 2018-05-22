@@ -61,9 +61,7 @@ class ProjectToken extends Component {
     return (
       <div className="project-token">
         <h2 className="token-title">Token</h2>
-        <div className="message">
-            {`Every project has a unique token, user can see the content of the project through this token`}
-        </div>
+        <div className="message">{`Every project has a unique token, user can see the content of the project through this token`}</div>
         <div className="token">
           <span>token:  <span className="token-message">{this.props.token}</span></span>
           <Tooltip title="Copy">
@@ -75,10 +73,7 @@ class ProjectToken extends Component {
             </Tooltip> : null
           }
         </div>
-        <div className="blockquote">
-            {`To ensure the security, do not tell others about the token other than users in this project`}
-        </div>
-
+        <div className="blockquote">{`To ensure the security, do not tell others about the token other than users in this project`}</div>
       </div>
     )
   }
