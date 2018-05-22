@@ -473,9 +473,9 @@ export default class InterfaceColMenu extends Component {
     return (
       <div>
         <div className="interface-filter">
-          <Input placeholder="搜索测试集合" onChange={this.filterCol} />
-          <Tooltip placement="bottom" title="添加集合">
-            <Button type="primary" style={{ marginLeft: "16px" }} onClick={() => this.showColModal('add')} className="btn-filter" >添加集合</Button>
+          <Input placeholder="Search test collection" onChange={this.filterCol} />
+          <Tooltip placement="bottom" title="Add Collection">
+            <Button type="primary" style={{ marginLeft: "16px" }} onClick={() => this.showColModal('add')} className="btn-filter" >Add Collection</Button>
           </Tooltip>
         </div>
         <Tree
@@ -500,16 +500,16 @@ export default class InterfaceColMenu extends Component {
                     <span><Icon type="folder-open" style={{ marginRight: 5 }} /><span>{col.name}</span></span>
                     <div className="btns">
 
-                      <Tooltip title="删除集合">
+                      <Tooltip title="Delete Collection">
                         <Icon type='delete' style={{ display: list.length > 1 ? '' : 'none' }} className="interface-delete-icon" onClick={() => { this.showDelColConfirm(col._id) }} />
                       </Tooltip>
-                      <Tooltip title="编辑集合">
+                      <Tooltip title="Edit Collection">
                         <Icon type='edit' className="interface-delete-icon" onClick={(e) => { e.stopPropagation(); this.showColModal('edit', col) }} />
                       </Tooltip>
-                      <Tooltip title="导入接口">
+                      <Tooltip title="Import API">
                         <Icon type='plus' className="interface-delete-icon" onClick={(e) => { e.stopPropagation(); this.showImportInterfaceModal(col._id) }} />
                       </Tooltip>
-                      <Tooltip title="克隆集合">
+                      <Tooltip title="Clone API">
                         <Icon type='copy' className="interface-delete-icon" onClick={(e) => { e.stopPropagation(); this.copyInterface(col) }} />
                       </Tooltip>
                     </div>

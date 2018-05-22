@@ -55,7 +55,7 @@ export default class Run extends Component {
       req_headers,
       req_body_type,
       req_body_form,
-      req_body_other     
+      req_body_other
     } = this.postman.state;
 
     let params = {
@@ -80,7 +80,7 @@ export default class Run extends Component {
     if (res.data.errcode) {
       message.error(res.data.errmsg)
     } else {
-      message.success('添加成功')
+      message.success('Add Success')
       this.setState({saveCaseModalVisible: false})
     }
   }
@@ -95,7 +95,7 @@ export default class Run extends Component {
     data.path = currProject.basepath +  currInterface.path;
     return (
       <div>
-        <Postman data={data} id={currProject._id} type="inter" saveTip="保存到集合" save={() => this.setState({saveCaseModalVisible: true})} ref={this.savePostmanRef} />
+        <Postman data={data} id={currProject._id} type="inter" saveTip="Save to collection" save={() => this.setState({saveCaseModalVisible: true})} ref={this.savePostmanRef} />
         <AddColModal
           visible={this.state.saveCaseModalVisible}
           caseName={currInterface.title}

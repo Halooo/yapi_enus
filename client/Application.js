@@ -22,7 +22,7 @@ const alertContent = () => {
   const ua = window.navigator.userAgent,
     isChrome = ua.indexOf("Chrome") && window.chrome;
   if (!isChrome) {
-    return <Alert style={{ zIndex: 99 }} message={'YApi 的接口测试等功能仅支持 Chrome 浏览器，请使用 Chrome 浏览器获得完整功能。'} banner closable />
+    return <Alert style={{ zIndex: 99 }} message={'YApi Only support Chrome, please use Chrome to get complete functionality'} banner closable />
   }
 }
 

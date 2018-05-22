@@ -40,9 +40,9 @@ export default class ProjectRequest extends Component {
       after_script: this.state.after_script
     })
     if(result.payload.data.errcode === 0){
-      message.success('保存成功')
+      message.success('Saved')
     }else{
-      message.success('保存失败, ' + result.payload.data.errmsg)
+      message.success('Save Failed, ' + result.payload.data.errmsg)
     }
   }
 
@@ -75,24 +75,24 @@ export default class ProjectRequest extends Component {
 
     return <div className="project-request">
       <Form  onSubmit={this.handleSubmit}>
-        <FormItem 
+        <FormItem
           {...formItemLayout}
-          label="Pre-request Script(请求参数处理脚本)">
+          label="Pre-request Script">
           <AceEditor data={pre_script} onChange={(editor)=> this.setState({pre_script: editor.text}) }  fullScreen={true} className="request-editor"  />
         </FormItem>
-        <FormItem  
+        <FormItem
           {...formItemLayout}
-          label="Pre-response Script(响应数据处理脚本)">
+          label="Pre-response Script">
           <AceEditor data={after_script} onChange={(editor)=> this.setState({after_script: editor.text}) }  fullScreen={true} className="request-editor"  />
         </FormItem>
-        <FormItem 
+        <FormItem
           {...tailFormItemLayout}
         >
           <Button
             onClick={this.handleSubmit}
             type="primary"
           >
-            保存
+            Save
           </Button>
         </FormItem>
       </Form>

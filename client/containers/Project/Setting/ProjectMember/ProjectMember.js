@@ -116,7 +116,7 @@ class ProjectMember extends Component {
           inputRole: 'dev',
           inputUids: []
         })
-        message.success(`添加成功! 已成功添加 ${addLength} 人，其中 ${existLength} 人已存在`);
+        message.success(`Added! Successfully added ${addLength} people， ${existLength} of them are already in the group`);
         this.reFetchList(); // 添加成功后重新获取分组成员列表
       }
     });
@@ -207,7 +207,7 @@ class ProjectMember extends Component {
 
   render() {
     const columns = [{
-      title: this.props.projectMsg.name + ' 项目成员 (' + this.state.projectMemberList.length + ') 人',
+      title: this.props.projectMsg.name + ' Members (' + this.state.projectMemberList.length + ') ',
       dataIndex: 'username',
       key: 'username',
       render: (text, record) => {
@@ -219,8 +219,8 @@ class ProjectMember extends Component {
     }, {
       title: (this.state.role === 'owner' || this.state.role === 'admin') ?
         <div className="btn-container">
-          <Button className="btn" type="primary" icon="plus" onClick={this.showAddMemberModal}>添加成员</Button>
-          <Button className="btn" icon="plus" onClick={this.showImportMemberModal}>批量导入成员</Button>
+          <Button className="btn" type="primary" icon="plus" onClick={this.showAddMemberModal}>{`Add Members`}</Button>
+          <Button className="btn" icon="plus" onClick={this.showImportMemberModal}>{`Import Members`}</Button>
         </div> : '',
       key: 'action',
       className: 'member-opration',
@@ -229,11 +229,11 @@ class ProjectMember extends Component {
           return (
             <div>
               <Select value={record.role + '-' + record.uid} className="select" onChange={this.changeUserRole}>
-                <Option value={'owner-' + record.uid}>组长</Option>
-                <Option value={'dev-' + record.uid}>开发者</Option>
-                <Option value={'guest-' + record.uid}>访客</Option>
+                <Option value={'owner-' + record.uid}>{`Group Owner`}</Option>
+                <Option value={'dev-' + record.uid}>{`Developer`}</Option>
+                <Option value={'guest-' + record.uid}>{`Guest`}</Option>
               </Select>
-              <Popconfirm placement="topRight" title="你确定要删除吗? " onConfirm={this.deleteConfirm(record.uid)} okText="确定" cancelText="">
+              <Popconfirm placement="topRight" title="Are you sure to delete? " onConfirm={this.deleteConfirm(record.uid)} okText="Confirm" cancelText="">
                 <Button type="danger" icon="delete" className="btn-danger" />
               </Popconfirm>
             </div>
@@ -241,11 +241,11 @@ class ProjectMember extends Component {
         } else {
           // 非管理员可以看到权限 但无法修改
           if (record.role === 'owner') {
-            return '组长';
+            return 'Group Owner';
           } else if (record.role === 'dev') {
-            return '开发者';
+            return 'Developer';
           } else if (record.role === 'guest') {
-            return '访客';
+            return 'Guest';
           } else {
             return '';
           }
@@ -261,41 +261,41 @@ class ProjectMember extends Component {
       <div className="g-row">
         <div className="m-panel">
           {this.state.visible ? <Modal
-            title="添加成员"
+            title="Add Member"
             visible={this.state.visible}
             onOk={this.handleOk}
             onCancel={this.handleCancel}
           >
             <Row gutter={6} className="modal-input">
-              <Col span="5"><div className="label usernamelabel">用户名: </div></Col>
+              <Col span="5"><div className="label usernamelabel">{`User name`}: </div></Col>
               <Col span="15">
                 <UsernameAutoComplete callbackState={this.onUserSelect} />
               </Col>
             </Row>
             <Row gutter={6} className="modal-input">
-              <Col span="5"><div className="label usernamelabel">权限: </div></Col>
+              <Col span="5"><div className="label usernamelabel">{`Role`}: </div></Col>
               <Col span="15">
                 <Select  defaultValue="dev" className="select" onChange={this.changeNewMemberRole}>
-                  <Option value="owner">组长</Option>
-                  <Option value="dev">开发者</Option>
-                  <Option value="guest">访客</Option>
+                  <Option value="owner">{`Group owner`}</Option>
+                  <Option value="dev">Developer</Option>
+                  <Option value="guest">Guest</Option>
                 </Select>
               </Col>
             </Row>
           </Modal> : ""}
           <Modal
-            title="批量导入成员"
+            title="Import Members"
             visible={this.state.modalVisible}
             onOk={this.handleModalOk}
             onCancel={this.handleModalCancel}
           >
             <Row gutter={6} className="modal-input">
-              <Col span="5"><div className="label usernamelabel">项目名: </div></Col>
+              <Col span="5"><div className="label usernamelabel">{`Project Name`}: </div></Col>
               <Col span="15">
                 <Select
                   showSearch
                   style={{ width: 200 }}
-                  placeholder="请选择项目名称"
+                  placeholder="Plese enter project name"
                   optionFilterProp="children"
                   onChange={this.handleChange}
                 >
@@ -306,14 +306,14 @@ class ProjectMember extends Component {
           </Modal>
 
           <Table columns={columns} dataSource={this.state.projectMemberList} pagination={false} locale={{ emptyText: <ErrMsg type="noMemberInProject" /> }} className="setting-project-member" />
-          <Card bordered={false} title={this.state.groupName + ' 分组成员 ' + '(' + this.state.groupMemberList.length + ') 人'} hoverable={true} className="setting-group">
+          <Card bordered={false} title={this.state.groupName + ' Group Member ' + '(' + this.state.groupMemberList.length + ') '} hoverable={true} className="setting-group">
             {this.state.groupMemberList.length ? this.state.groupMemberList.map((item, index) => {
               return (<div key={index} className="card-item">
                 <img src={location.protocol + '//' + location.host + '/api/user/avatar?uid=' + item.uid} className="item-img" />
-                <p className="item-name">{item.username}{item.uid === this.props.uid ? <Badge count={'我'} style={{ backgroundColor: '#689bd0', fontSize: '13px', marginLeft: '8px', borderRadius: '4px' }} /> : null}</p>
-                {item.role === 'owner' ? <p className="item-role">组长</p> : null}
-                {item.role === 'dev' ? <p className="item-role">开发者</p> : null}
-                {item.role === 'guest' ? <p className="item-role">访客</p> : null}
+                <p className="item-name">{item.username}{item.uid === this.props.uid ? <Badge count={'Me'} style={{ backgroundColor: '#689bd0', fontSize: '13px', marginLeft: '8px', borderRadius: '4px' }} /> : null}</p>
+                {item.role === 'owner' ? <p className="item-role">{`Group Owner`}</p> : null}
+                {item.role === 'dev' ? <p className="item-role">Developer</p> : null}
+                {item.role === 'guest' ? <p className="item-role">Guest</p> : null}
               </div>);
             }) : <ErrMsg type="noMemberInGroup" />}
           </Card>

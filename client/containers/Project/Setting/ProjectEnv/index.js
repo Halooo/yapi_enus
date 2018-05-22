@@ -62,7 +62,7 @@ class ProjectEnv extends Component {
   // 增加环境变量项
   addParams = (name, data) => {
     let newValue = {};
-    data = { name: '新环境', domain: '', header: [] };
+    data = { name: 'New env', domain: '', header: [] };
     newValue[name] = [].concat(data, this.state[name]);
     this.setState(newValue);
     this.handleClick(0, data);
@@ -98,12 +98,12 @@ class ProjectEnv extends Component {
       .then(res => {
         if (res.payload.data.errcode == 0) {
           this.props.getProject(this.props.projectId);
-          message.success('修改成功! ');
+          message.success('Edit success! ');
           this.setState({ ...assignValue });
         }
       })
       .catch(() => {
-        message.error('环境设置不成功 ');
+        message.error('Env setting failed ');
       });
   }
 
@@ -120,7 +120,7 @@ class ProjectEnv extends Component {
   // 动态修改环境名称
   handleInputChange = (value, currentKey) => {
     let newValue = [].concat(this.state.env);
-    newValue[currentKey].name = value || '新环境';
+    newValue[currentKey].name = value || 'New env';
     this.setState({ env: newValue });
   };
 
@@ -148,17 +148,17 @@ class ProjectEnv extends Component {
           onMouseEnter={() => this.enterItem(index)}
         >
           <span className="env-icon-style">
-            <span className="env-name" style={{ color: item.name === '新环境' && '#2395f1' }}>
+            <span className="env-name" style={{ color: item.name === 'New env' && '#2395f1' }}>
               {item.name}
             </span>
             <Popconfirm
-              title="您确认删除此环境变量?"
+              title="Are you sure to delete this env variable?"
               onConfirm={e => {
                 e.stopPropagation();
                 this.showConfirm(index, 'env');
               }}
-              okText="确定"
-              cancelText="取消"
+              okText="Confirm"
+              cancelText="Cancel"
             >
               <Icon
                 type="delete"
@@ -181,11 +181,11 @@ class ProjectEnv extends Component {
               <Row className="first-menu-item menu-item">
                 <div className="env-icon-style">
                   <h3>
-                    环境列表&nbsp;<Tooltip placement="top" title="在这里添加项目的环境配置">
+                    Env List&nbsp;<Tooltip placement="top" title="Add env settings here">
                       <Icon type="question-circle-o" />
                     </Tooltip>
                   </h3>
-                  <Tooltip title="添加环境变量">
+                  <Tooltip title="Add env variables">
                     <Icon type="plus" onClick={() => this.addParams('env')} />
                   </Tooltip>
                 </div>

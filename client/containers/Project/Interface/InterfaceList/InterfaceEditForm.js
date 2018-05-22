@@ -220,7 +220,7 @@ class InterfaceEditForm extends Component {
           values.markdown = this.editor.getMarkdown();
           if (values.res_body_type === 'json') {
             if (this.state.res_body && validJson(this.state.res_body) === false) {
-              return message.error('返回body json格式有问题，请检查！');
+              return message.error('Return body json format is wrong, please check');
             }
             try {
               values.res_body = JSON.stringify(JSON.parse(this.state.res_body), null, '   ');
@@ -230,7 +230,7 @@ class InterfaceEditForm extends Component {
           }
           if (values.req_body_type === 'json') {
             if (this.state.req_body_other && validJson(this.state.req_body_other) === false) {
-              return message.error('响应Body json格式有问题，请检查！');
+              return message.error('Response Body json format is wrong, please check');
             }
             try {
               values.req_body_other = JSON.stringify(
@@ -304,7 +304,7 @@ class InterfaceEditForm extends Component {
           if (values.req_body_is_json_schema && values.req_body_other&& values.req_body_type==='json') {
             values.req_body_other = checkIsJsonSchema(values.req_body_other);
             if (!values.req_body_other) {
-              return message.error('请求参数 json-schema 格式有误');
+              return message.error('Request param json-schema format incorrect');
             }
           }
           if (
@@ -314,7 +314,7 @@ class InterfaceEditForm extends Component {
           ) {
             values.res_body = checkIsJsonSchema(values.res_body);
             if (!values.res_body) {
-              return message.error('返回数据 json-schema 格式有误');
+              return message.error('Return data json-schema format incorrect');
             }
           }
 
@@ -426,10 +426,10 @@ class InterfaceEditForm extends Component {
       if (this.resBodyEditor.curData.format === true) {
         str = JSON.stringify(this.resBodyEditor.curData.mockData(), null, '  ');
       } else {
-        str = '解析出错: ' + this.resBodyEditor.curData.format;
+        str = 'Resolving error: ' + this.resBodyEditor.curData.format;
       }
     } catch (err) {
-      str = '解析出错: ' + err.message;
+      str = 'Resolving error: ' + err.message;
     }
     this.mockPreview.setValue(str);
   };
@@ -559,27 +559,27 @@ class InterfaceEditForm extends Component {
           <Col span="4" draggable="false" className="interface-edit-item-content-col">
             {getFieldDecorator('req_query[' + index + '].name', {
               initialValue: data.name
-            })(<TextArea autosize={{ minRows: 1, maxRows: 1 }} placeholder="参数名称" />)}
+            })(<TextArea autosize={{ minRows: 1, maxRows: 1 }} placeholder="Param name" />)}
           </Col>
           <Col span="3" className="interface-edit-item-content-col">
             {getFieldDecorator('req_query[' + index + '].required', {
               initialValue: data.required
             })(
               <Select>
-                <Option value="1">必需</Option>
-                <Option value="0">非必需</Option>
+                <Option value="1">Required</Option>
+                <Option value="0">Not required</Option>
               </Select>
             )}
           </Col>
           <Col span="6" className="interface-edit-item-content-col">
             {getFieldDecorator('req_query[' + index + '].example', {
               initialValue: data.example
-            })(<TextArea autosize={true} placeholder="参数示例" />)}
+            })(<TextArea autosize={true} placeholder="Param example" />)}
           </Col>
           <Col span="9" className="interface-edit-item-content-col">
             {getFieldDecorator('req_query[' + index + '].desc', {
               initialValue: data.desc
-            })(<TextArea autosize={true} placeholder="备注" />)}
+            })(<TextArea autosize={true} placeholder="Description" />)}
           </Col>
           <Col span="1" className="interface-edit-item-content-col">
             <Icon
@@ -611,24 +611,24 @@ class InterfaceEditForm extends Component {
                 filterOption={(inputValue, option) =>
                   option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
                 }
-                placeholder="参数名称"
+                placeholder="Param name"
               />
             )}
           </Col>
           <Col span="5" className="interface-edit-item-content-col">
             {getFieldDecorator('req_headers[' + index + '].value', {
               initialValue: data.value
-            })(<TextArea autosize={{ minRows: 1, maxRows: 1 }} placeholder="参数值" />)}
+            })(<TextArea autosize={{ minRows: 1, maxRows: 1 }} placeholder="Param value" />)}
           </Col>
           <Col span="5" className="interface-edit-item-content-col">
             {getFieldDecorator('req_headers[' + index + '].example', {
               initialValue: data.example
-            })(<TextArea autosize={true} placeholder="参数示例" />)}
+            })(<TextArea autosize={true} placeholder="Param example" />)}
           </Col>
           <Col span="8" className="interface-edit-item-content-col">
             {getFieldDecorator('req_headers[' + index + '].desc', {
               initialValue: data.desc
-            })(<TextArea autosize={true} placeholder="备注" />)}
+            })(<TextArea autosize={true} placeholder="Description" />)}
           </Col>
           <Col span="1" className="interface-edit-item-content-col">
             <Icon
@@ -671,20 +671,20 @@ class InterfaceEditForm extends Component {
               initialValue: data.required
             })(
               <Select>
-                <Option value="1">必需</Option>
-                <Option value="0">非必需</Option>
+                <Option value="1">Required</Option>
+                <Option value="0">Not required</Option>
               </Select>
             )}
           </Col>
           <Col span="5" className="interface-edit-item-content-col">
             {getFieldDecorator('req_body_form[' + index + '].example', {
               initialValue: data.example
-            })(<TextArea autosize={true} placeholder="参数示例" />)}
+            })(<TextArea autosize={true} placeholder="Param example" />)}
           </Col>
           <Col span="7" className="interface-edit-item-content-col">
             {getFieldDecorator('req_body_form[' + index + '].desc', {
               initialValue: data.desc
-            })(<TextArea autosize={true} placeholder="备注" />)}
+            })(<TextArea autosize={true} placeholder="Description" />)}
           </Col>
           <Col span="1" className="interface-edit-item-content-col">
             <Icon
@@ -703,17 +703,17 @@ class InterfaceEditForm extends Component {
           <Col span="6" className="interface-edit-item-content-col">
             {getFieldDecorator('req_params[' + index + '].name', {
               initialValue: data.name
-            })(<Input disabled placeholder="参数名称" />)}
+            })(<Input disabled placeholder="Param name" />)}
           </Col>
           <Col span="7" className="interface-edit-item-content-col">
             {getFieldDecorator('req_params[' + index + '].example', {
               initialValue: data.example
-            })(<TextArea autosize={true} placeholder="参数示例" />)}
+            })(<TextArea autosize={true} placeholder="Param example" />)}
           </Col>
           <Col span="11" className="interface-edit-item-content-col">
             {getFieldDecorator('req_params[' + index + '].desc', {
               initialValue: data.desc
-            })(<TextArea autosize={true} placeholder="备注" />)}
+            })(<TextArea autosize={true} placeholder="Description" />)}
           </Col>
         </Row>
       );
@@ -742,22 +742,22 @@ class InterfaceEditForm extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <h2 className="interface-title" style={{ marginTop: 0 }}>
-          基本设置
+          Basic Setting
         </h2>
         <div className="panel-sub">
-          <FormItem className="interface-edit-item" {...formItemLayout} label="接口名称">
+          <FormItem className="interface-edit-item" {...formItemLayout} label="API name">
             {getFieldDecorator('title', {
               initialValue: this.state.title,
-              rules: nameLengthLimit('接口')
-            })(<Input id="title" placeholder="接口名称" />)}
+              rules: nameLengthLimit('APIs')
+            })(<Input id="title" placeholder="API name" />)}
           </FormItem>
 
-          <FormItem className="interface-edit-item" {...formItemLayout} label="选择分类">
+          <FormItem className="interface-edit-item" {...formItemLayout} label="Choose category">
             {getFieldDecorator('catid', {
               initialValue: this.state.catid + '',
-              rules: [{ required: true, message: '请选择一个分类' }]
+              rules: [{ required: true, message: 'Please choose a category' }]
             })(
-              <Select placeholder="请选择一个分类">
+              <Select placeholder="Please choose a category">
                 {this.props.cat.map(item => {
                   return (
                     <Option key={item._id} value={item._id + ''}>
@@ -774,14 +774,14 @@ class InterfaceEditForm extends Component {
             {...formItemLayout}
             label={
               <span>
-                接口路径&nbsp;
+                API Path&nbsp;
                 <Tooltip
                   title={
                     <div>
-                      <p>1. 支持动态路由,例如:{DEMOPATH}</p>
+                      <p>1. Supports dynamic routing, i.e. :{DEMOPATH}</p>
                       <p>
-                        2. 支持 ?controller=xxx 的QueryRouter,非router的Query参数请定义到
-                        Request设置-&#62;Query
+                        2. Supports ?controller=xxx QueryRouter, Query parameters not in router, please define in
+                        Request Settings-&#62;Query
                       </p>
                     </div>
                   }
@@ -807,7 +807,7 @@ class InterfaceEditForm extends Component {
               </Select>
 
               <Tooltip
-                title="接口基本路径，可在 项目设置 里修改"
+                title="API base url can be edited in Project Setting"
                 style={{
                   display: this.props.basepath == '' ? 'block' : 'none'
                 }}
@@ -825,7 +825,7 @@ class InterfaceEditForm extends Component {
                 rules: [
                   {
                     required: true,
-                    message: '请输入接口路径!'
+                    message: 'Please enter API path!'
                   }
                 ]
               })(<Input onChange={this.handlePath} placeholder="/path" style={{ width: '60%' }} />)}
@@ -837,11 +837,11 @@ class InterfaceEditForm extends Component {
             </Row>
           </FormItem>
 
-          <FormItem className="interface-edit-item" {...formItemLayout} label="状态">
+          <FormItem className="interface-edit-item" {...formItemLayout} label="Status">
             {getFieldDecorator('status', { initialValue: this.state.status })(
               <Select>
-                <Option value="done">已完成</Option>
-                <Option value="undone">未完成</Option>
+                <Option value="done">Completed</Option>
+                <Option value="undone">Not completed</Option>
               </Select>
             )}
           </FormItem>
@@ -849,12 +849,12 @@ class InterfaceEditForm extends Component {
             <FormItem className="interface-edit-item" {...formItemLayout} label={custom_field.name}>
               {getFieldDecorator('custom_field_value', {
                 initialValue: this.state.custom_field_value
-              })(<Input placeholder="请输入" />)}
+              })(<Input placeholder="Please enter" />)}
             </FormItem>
           )}
         </div>
 
-        <h2 className="interface-title">请求参数设置</h2>
+        <h2 className="interface-title">Request Parameter Setting</h2>
 
         <div className="container-radiogroup">
           <RadioGroup
@@ -874,7 +874,7 @@ class InterfaceEditForm extends Component {
         <div className="panel-sub">
           <FormItem className={'interface-edit-item ' + this.state.hideTabs.req.query}>
             <Button size="small" type="primary" onClick={() => this.addParams('req_query')}>
-              添加Query参数
+              Add Query Parameter
             </Button>
           </FormItem>
 
@@ -892,7 +892,7 @@ class InterfaceEditForm extends Component {
 
           <FormItem className={'interface-edit-item ' + this.state.hideTabs.req.headers}>
             <Button size="small" type="primary" onClick={() => this.addParams('req_headers')}>
-              添加Header
+              Add Header
             </Button>
           </FormItem>
 
@@ -938,7 +938,7 @@ class InterfaceEditForm extends Component {
                         type="primary"
                         onClick={() => this.addParams('req_body_form')}
                       >
-                        添加form参数
+                        Add form parameter
                       </Button>
                     </Col>
                   </Row>
@@ -966,16 +966,16 @@ class InterfaceEditForm extends Component {
             {getFieldDecorator('req_body_is_json_schema', {
               valuePropName: 'checked',
               initialValue: this.state.req_body_is_json_schema
-            })(<Switch checkedChildren="开" unCheckedChildren="关" />)}
+            })(<Switch checkedChildren="On" unCheckedChildren="Off" />)}
 
             <Col style={{ marginTop: '5px' }} className="interface-edit-json-info">
               {!this.props.form.getFieldValue('req_body_is_json_schema') ? (
                 <span>
-                  基于 Json5, 参数描述信息用注释的方式实现{' '}
+                  Json5, parameter description information as comments{' '}
                   <Tooltip title={<pre>{Json5Example}</pre>}>
                     <Icon type="question-circle-o" style={{ color: '#086dbf' }} />
                   </Tooltip>
-                  “全局编辑”或 “退出全屏” 请按 F9
+                  “Fullscreen” or “Exit Fullscreen” press F9
                 </span>
               ) : (
                 <ReqBodySchema
@@ -1029,7 +1029,7 @@ class InterfaceEditForm extends Component {
         {/* ----------- Response ------------- */}
 
         <h2 className="interface-title">
-          返回数据设置&nbsp;
+          Return data setting&nbsp;
           {getFieldDecorator('res_body_is_json_schema', {
             valuePropName: 'checked',
             initialValue: this.state.res_body_is_json_schema
@@ -1054,18 +1054,18 @@ class InterfaceEditForm extends Component {
           >
             <Col>
               <Tabs size="large" defaultActiveKey="tpl" onChange={this.handleJsonType}>
-                <TabPane tab="模板" key="tpl" />
-                <TabPane tab="预览" key="preview" />
+                <TabPane tab="Template" key="tpl" />
+                <TabPane tab="Preview" key="preview" />
               </Tabs>
               <div style={{ marginTop: '10px' }}>
                 {!this.props.form.getFieldValue('res_body_is_json_schema') ? (
                   <div style={{ padding: '10px 0', fontSize: '15px' }}>
                     <span>
-                      基于 mockjs 和 json5,使用注释方式写参数说明{' '}
+                      based on mockjs and json5, parameter description use comments{' '}
                       <Tooltip title={<pre>{Json5Example}</pre>}>
                         <Icon type="question-circle-o" style={{ color: '#086dbf' }} />
                       </Tooltip>{' '}
-                      ,具体使用方法请{' '}
+                      , tailed usage please{' '}
                       <span
                         className="href"
                         onClick={() =>
@@ -1075,10 +1075,10 @@ class InterfaceEditForm extends Component {
                           )
                         }
                       >
-                        查看文档
+                        see documents
                       </span>
                     </span>
-                    ，“全局编辑”或 “退出全屏” 请按 <span style={{ fontWeight: '500' }}>F9</span>
+                    ，“Fullscreen” or “Exit Fullscreen” press <span style={{ fontWeight: '500' }}>F9</span>
                   </div>
                 ) : (
                   <div style={{display: this.state.jsonType === 'tpl' ? 'block' : 'none'}}>
@@ -1094,7 +1094,7 @@ class InterfaceEditForm extends Component {
                     data={res_body}
                   />
                   </div>
-                  
+
                 )}
 
                 <div
@@ -1129,7 +1129,7 @@ class InterfaceEditForm extends Component {
 
         {/* ----------- remark ------------- */}
 
-        <h2 className="interface-title">备 注</h2>
+        <h2 className="interface-title">Note</h2>
         <div className="panel-sub">
           <FormItem className={'interface-edit-item'}>
             <div>
@@ -1139,15 +1139,15 @@ class InterfaceEditForm extends Component {
         </div>
 
         {/* ----------- email ------------- */}
-        <h2 className="interface-title">其 他</h2>
+        <h2 className="interface-title">Others</h2>
         <div className="panel-sub">
           <FormItem
             className={'interface-edit-item'}
             {...formItemLayout}
             label={
               <span>
-                邮件通知&nbsp;
-                <Tooltip title={'开启邮件通知，可在 项目设置 里修改'}>
+                Email notification&nbsp;
+                <Tooltip title={'Turn on email notification, change in Project Setting'}>
                   <Icon type="question-circle-o" style={{ width: '10px' }} />
                 </Tooltip>
               </span>
@@ -1156,15 +1156,15 @@ class InterfaceEditForm extends Component {
             {getFieldDecorator('switch_notice', {
               valuePropName: 'checked',
               initialValue: this.props.noticed
-            })(<Switch checkedChildren="开" unCheckedChildren="关" />)}
+            })(<Switch checkedChildren="On" unCheckedChildren="Off" />)}
           </FormItem>
           <FormItem
             className={'interface-edit-item'}
             {...formItemLayout}
             label={
               <span>
-                开放接口&nbsp;
-                <Tooltip title={'用户可以在 数据导出 时选择只导出公开接口'}>
+                Public API&nbsp;
+                <Tooltip title={'User can choose to only export public APIs'}>
                   <Icon type="question-circle-o" style={{ width: '10px' }} />
                 </Tooltip>
               </span>
@@ -1173,7 +1173,7 @@ class InterfaceEditForm extends Component {
             {getFieldDecorator('api_opened', {
               valuePropName: 'checked',
               initialValue: this.state.api_opened
-            })(<Switch checkedChildren="开" unCheckedChildren="关" />)}
+            })(<Switch checkedChildren="On" unCheckedChildren="Off" />)}
           </FormItem>
         </div>
 
@@ -1189,7 +1189,7 @@ class InterfaceEditForm extends Component {
               size="large"
               htmlType="submit"
             >
-              保存
+              Save
             </Button>
           </Affix>
         </FormItem>

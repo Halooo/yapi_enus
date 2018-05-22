@@ -34,7 +34,7 @@ class Content extends Component {
   }
   constructor(props) {
     super(props)
-    this.title = 'YApi-高效、易用、功能强大的可视化接口管理平台';
+    this.title = 'YApi - API Management Platform';
     this.state = {
       curtab: 'view',
       visible: false,
@@ -105,23 +105,23 @@ class Content extends Component {
       visible: false
     });
   }
-  render() {    
-    if(this.props.curdata.title){      
+  render() {
+    if(this.props.curdata.title){
       document.getElementsByTagName('title')[0].innerText = this.props.curdata.title + '-' + this.title;
     }
-    
+
     let InterfaceTabs = {
       view: {
         component: View,
-        name: '预览'
+        name: 'Preview'
       },
       edit: {
         component: Edit,
-        name: '编辑'
+        name: 'Edit'
       },
       run: {
         component: Run,
-        name: '运行'
+        name: 'Run'
       }
     }
 
@@ -135,31 +135,31 @@ class Content extends Component {
     </Tabs>;
     let tabContent = null;
     if (this.state.curtab) {
-      
+
       let C = InterfaceTabs[this.state.curtab].component;
       tabContent = <C switchToView={this.switchToView} />;
     }
-    
+
     return <div className="interface-content">
       <Prompt
         when={this.state.curtab === 'edit' && this.props.editStatus ? true : false}
         message={() => {
           // this.showModal();
-          return '离开页面会丢失当前编辑的内容，确定要离开吗？';
+          return 'Leaving the page will not save the changes, are you sure?';
         }}
       />
       {tabs}
       {tabContent}
       { this.state.visible && <Modal
-        title="你即将离开编辑页面"
+        title="You are leaving the page"
         visible={this.state.visible}
         onCancel={this.handleCancel}
         footer={[
-          <Button key="back" onClick={this.handleCancel}>取 消</Button>,
-          <Button key="submit" onClick={this.handleOk}>确 定</Button>
+          <Button key="back" onClick={this.handleCancel}>Cancel</Button>,
+          <Button key="submit" onClick={this.handleOk}>OK</Button>
         ]}
       >
-        <p>离开页面会丢失当前编辑的内容，确定要离开吗？</p>
+        <p>Leaving the page will not save the changes, are you sure?</p>
       </Modal> }
     </div>
   }

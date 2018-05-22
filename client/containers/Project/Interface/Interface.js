@@ -76,7 +76,7 @@ class Interface extends Component {
       action = this.props.isShowCol ? 'col' : 'case';
     }
     this.props.history.push('/project/' + params.id + '/interface/' + action)
-    
+
   }
   componentWillMount(){
     this.props.setColData({
@@ -88,18 +88,18 @@ class Interface extends Component {
     const { action } = this.props.match.params;
     // const activeKey = this.state.curkey;
     const activeKey = action === 'api' ? 'api' : 'colOrCase'
-    
-   
+
+
     return (
       <Layout style={{minHeight: 'calc(100vh - 156px)', marginLeft: '24px', marginTop: '24px'}}>
         <Sider style={{ height: '100%' }} width={300}>
           <div className="left-menu">
             <Tabs type="card" className="tabs-large" activeKey={activeKey} onChange={this.onChange}>
-              <Tabs.TabPane tab="接口列表" key="api">
-                
+              <Tabs.TabPane tab="API List" key="api">
+
               </Tabs.TabPane>
-              <Tabs.TabPane tab="测试集合" key="colOrCase" >
-                
+              <Tabs.TabPane tab="Test Collection" key="colOrCase" >
+
               </Tabs.TabPane>
             </Tabs>
             {activeKey === 'api'?

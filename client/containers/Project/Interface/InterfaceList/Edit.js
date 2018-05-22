@@ -50,7 +50,7 @@ class InterfaceEdit extends Component {
     if (result.data.errcode === 0) {
 
       this.props.updateInterfaceData(params);
-      message.success('保存成功');
+      message.success('Saved');
     } else {
       message.error(result.data.errmsg)
     }
@@ -110,7 +110,7 @@ class InterfaceEdit extends Component {
           curdata: this.props.curdata,
           status: 1
         })
-        console.warn('websocket 连接失败，将导致多人编辑同一个接口冲突。')
+        console.warn('websocket connection failed, conflict while multiple people editing same API')
       }
     } catch (e) {
 
@@ -118,7 +118,7 @@ class InterfaceEdit extends Component {
         curdata: this.props.curdata,
         status: 1
       })
-      console.error('websocket 连接失败，将导致多人编辑同一个接口冲突。');
+      console.error('websocket failed, conflict while multiple people editing same API');
     }
 
   }
@@ -139,12 +139,12 @@ class InterfaceEdit extends Component {
         this.state.status === 2 ?
           <div style={{ textAlign: 'center', fontSize: '14px', paddingTop: '10px' }}>
             <Link to={'/user/profile/' + this.state.curdata.uid}><b>{this.state.curdata.username}</b></Link>
-            <span>正在编辑该接口，请稍后再试...</span>
+            <span>Editing the API, please try again later...</span>
           </div>
           :
           null}
       {
-        this.state.status === 0 && '正在加载，请耐心等待...'
+        this.state.status === 0 && 'Loading, please wait...'
       }
 
     </div>

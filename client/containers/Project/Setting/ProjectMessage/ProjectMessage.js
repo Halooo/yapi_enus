@@ -112,12 +112,12 @@ class ProjectMessage extends Component {
         const selectGroup = _.find(groupList, (item)=>{
           return item._id == group_id
         })
-        
+
         updateProject(assignValue)
           .then(res => {
             if (res.payload.data.errcode == 0) {
               this.props.getProject(this.props.projectId);
-              message.success('修改成功! ');
+              message.success('Edit Success! ');
 
               // 如果如果项目所在的分组位置发生改变
               this.props.fetchGroupMsg(group_id);
@@ -139,17 +139,17 @@ class ProjectMessage extends Component {
   showConfirm = () => {
     let that = this;
     confirm({
-      title: '确认删除 ' + that.props.projectMsg.name + ' 项目吗？',
+      title: 'Confirm delete ' + that.props.projectMsg.name + ' project?',
       content: (
         <div style={{ marginTop: '10px', fontSize: '13px', lineHeight: '25px' }}>
           <Alert
-            message="警告：此操作非常危险,会删除该项目下面所有接口，并且无法恢复!"
+            message="Warning：this will delete all APIs under this project, and not revertible!"
             type="warning"
             banner
           />
           <div style={{ marginTop: '16px' }}>
             <p style={{ marginBottom: '8px' }}>
-              <b>请输入项目名称确认此操作:</b>
+              <b>Please enter Project Name to delete:</b>
             </p>
             <Input id="project_name" size="large" />
           </div>
@@ -158,14 +158,14 @@ class ProjectMessage extends Component {
       onOk() {
         let groupName = trim(document.getElementById('project_name').value);
         if (that.props.projectMsg.name !== groupName) {
-          message.error('项目名称有误');
+          message.error('Incorrect Name');
           return new Promise((resolve, reject) => {
             reject('error');
           });
         } else {
           that.props.delProject(that.props.projectId).then(res => {
             if (res.payload.data.errcode == 0) {
-              message.success('删除成功!');
+              message.success('Deleted!');
               that.props.history.push('/group/' + that.props.projectMsg.group_id);
             }
           });
@@ -217,7 +217,7 @@ class ProjectMessage extends Component {
       '//' +
       location.hostname +
       (location.port !== '' ? ':' + location.port : '') +
-      `/mock/${projectMsg._id}${projectMsg.basepath}+$接口请求路径`;
+      `/mock/${projectMsg._id}${projectMsg.basepath}+$request_path`;
     let initFormValues = {};
     const { name, basepath, desc, project_type, group_id, switch_notice } = projectMsg;
     initFormValues = { name, basepath, desc, project_type, group_id, switch_notice };
@@ -281,22 +281,22 @@ class ProjectMessage extends Component {
           </Row>
           <hr className="breakline" />
           <Form>
-            <FormItem {...formItemLayout} label="项目ID">
+            <FormItem {...formItemLayout} label="Project ID">
               <span>{this.props.projectMsg._id}</span>
             </FormItem>
-            <FormItem {...formItemLayout} label="项目名称">
+            <FormItem {...formItemLayout} label="Project Name">
               {getFieldDecorator('name', {
                 initialValue: initFormValues.name,
-                rules: nameLengthLimit('项目')
+                rules: nameLengthLimit('Project')
               })(<Input />)}
             </FormItem>
-            <FormItem {...formItemLayout} label="所属分组">
+            <FormItem {...formItemLayout} label="Group">
               {getFieldDecorator('group_id', {
                 initialValue: initFormValues.group_id + '',
                 rules: [
                   {
                     required: true,
-                    message: '请选择项目所属的分组!'
+                    message: 'Plese select a group!'
                   }
                 ]
               })(
@@ -314,8 +314,8 @@ class ProjectMessage extends Component {
               {...formItemLayout}
               label={
                 <span>
-                  接口基本路径&nbsp;
-                  <Tooltip title="基本路径为空表示根路径">
+                    {`Base path`}&nbsp;
+                  <Tooltip title="base url as root if left blank">
                     <Icon type="question-circle-o" />
                   </Tooltip>
                 </span>
@@ -326,7 +326,7 @@ class ProjectMessage extends Component {
                 rules: [
                   {
                     required: false,
-                    message: '请输入基本路径! '
+                    message: 'Enter base path! '
                   }
                 ]
               })(<Input />)}
@@ -337,7 +337,7 @@ class ProjectMessage extends Component {
               label={
                 <span>
                   MOCK地址&nbsp;
-                  <Tooltip title="具体使用方法请查看文档">
+                  <Tooltip title="see documentation for details">
                     <Icon type="question-circle-o" />
                   </Tooltip>
                 </span>
@@ -346,7 +346,7 @@ class ProjectMessage extends Component {
               <Input disabled value={mockUrl} onChange={() => {}} />
             </FormItem>
 
-            <FormItem {...formItemLayout} label="描述">
+            <FormItem {...formItemLayout} label="Description">
               {getFieldDecorator('desc', {
                 initialValue: initFormValues.desc,
                 rules: [
@@ -356,14 +356,14 @@ class ProjectMessage extends Component {
                 ]
               })(<TextArea rows={8} />)}
             </FormItem>
-            <FormItem {...formItemLayout} label="默认开启邮件通知">
+            <FormItem {...formItemLayout} label="Default to turn on email notification">
               {getFieldDecorator('switch_notice', {
                 valuePropName: 'checked',
                 initialValue: initFormValues.switch_notice
-              })(<Switch checkedChildren="开" unCheckedChildren="关" />)}
+              })(<Switch checkedChildren="On" unCheckedChildren="Off" />)}
             </FormItem>
 
-            <FormItem {...formItemLayout} label="权限">
+            <FormItem {...formItemLayout} label="Scope">
               {getFieldDecorator('project_type', {
                 rules: [
                   {
@@ -374,13 +374,13 @@ class ProjectMessage extends Component {
               })(
                 <RadioGroup>
                   <Radio value="private" className="radio">
-                    <Icon type="lock" />私有<br />
-                    <span className="radio-desc">只有组长和项目开发者可以索引并查看项目信息</span>
+                    <Icon type="lock" />Private<br />
+                    <span className="radio-desc">{`Only group owner and developer can index and see this project`}</span>
                   </Radio>
                   <br />
                   <Radio value="public" className="radio">
-                    <Icon type="unlock" />公开<br />
-                    <span className="radio-desc">任何人都可以索引并查看项目信息</span>
+                    <Icon type="unlock" />Public<br />
+                    <span className="radio-desc">{`Everyone can see the project`}</span>
                   </Radio>
                 </RadioGroup>
               )}
@@ -395,7 +395,7 @@ class ProjectMessage extends Component {
               size="large"
               onClick={this.handleOk}
             >
-              保 存
+                Save
             </Button>
           </div>
 
@@ -404,18 +404,18 @@ class ProjectMessage extends Component {
             <div className="danger-container">
               <div className="title">
                 <h2 className="content">
-                  <Icon type="exclamation-circle-o" /> 危险操作
+                  <Icon type="exclamation-circle-o" /> Danger
                 </h2>
                 <Button onClick={this.toggleDangerOptions}>
-                  查 看<Icon type={this.state.showDangerOptions ? 'up' : 'down'} />
+                  See<Icon type={this.state.showDangerOptions ? 'up' : 'down'} />
                 </Button>
               </div>
               {this.state.showDangerOptions ? (
                 <Card hoverable={true} className="card-danger">
                   <div className="card-danger-content">
-                    <h3>删除项目</h3>
-                    <p>项目一旦删除，将无法恢复数据，请慎重操作！</p>
-                    <p>只有组长和管理员有权限删除项目。</p>
+                    <h3>{`Delete project`}</h3>
+                    <p>{`deleted data is not revertile`}</p>
+                    <p>{`Only group owner and admin can delete projects`}</p>
                   </div>
                   <Button
                     type="danger"
@@ -423,7 +423,7 @@ class ProjectMessage extends Component {
                     className="card-danger-btn"
                     onClick={this.showConfirm}
                   >
-                    删除
+                    Delete
                   </Button>
                 </Card>
               ) : null}

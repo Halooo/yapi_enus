@@ -70,7 +70,7 @@ class List extends Component {
       id: uid
     }).then((res) => {
       if (res.data.errcode === 0) {
-        message.success('已删除此用户');
+        message.success('Deleted user');
         let userlist = this.state.data;
         userlist = userlist.filter((item) => {
           return item._id != uid
@@ -87,7 +87,7 @@ class List extends Component {
   }
 
   async componentWillMount() {
-    this.props.setBreadcrumb([{ name: '用户管理' }]);
+    this.props.setBreadcrumb([{ name: 'User management' }]);
   }
 
   render() {
@@ -97,7 +97,7 @@ class List extends Component {
       data = this.state.data;
     }
     let columns = [{
-      title: '用户名',
+      title: 'User name',
       dataIndex: 'username',
       key: 'username',
       width: 180,
@@ -109,25 +109,25 @@ class List extends Component {
       dataIndex: 'email',
       key: 'email'
     }, {
-      title: '用户角色',
+      title: 'Role',
       dataIndex: 'role',
       key: 'role',
       width: 150
     }, {
-      title: '更新日期',
+      title: 'Last Updated',
       dataIndex: 'up_time',
       key: 'up_time',
       width: 160
     }, {
-      title: '功能',
+      title: 'Action',
       key: 'action',
       width: "90px",
       render: (item) => {
         return (
-          <span>            
+          <span>
             {/* <span className="ant-divider" /> */}
-            <Popconfirm title="确认删除此用户?" onConfirm={() => { this.confirm(item._id) }} okText="确定" cancelText="取消">
-              <a style={{display:"block",textAlign:"center"}} href="#">删除</a>
+            <Popconfirm title="Delete this user?" onConfirm={() => { this.confirm(item._id) }} okText="Confirm" cancelText="Cancel">
+              <a style={{display:"block",textAlign:"center"}} href="#">Delete</a>
             </Popconfirm>
           </span>
         )
@@ -150,7 +150,7 @@ class List extends Component {
 
     return (
       <section className="user-table">
-        <h2 style={{marginBottom:'10px'}} >用户总数：{this.state.total}位</h2>
+        <h2 style={{marginBottom:'10px'}} >Total：{this.state.total} users</h2>
         <Table bordered={true} columns={columns} pagination={pageConfig} dataSource={data} />
 
       </section>

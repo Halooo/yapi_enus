@@ -58,11 +58,11 @@ export default class Project extends Component {
   render() {
     const { match, location } = this.props;
     let routers = {
-      activity: { name: '动态', path: "/project/:id/activity" },
-      interface: { name: '接口', path: "/project/:id/interface/:action" },
-      setting: { name: '设置', path: "/project/:id/setting" },
-      members: { name: '成员管理', path: "/project/:id/members" },
-      data: { name: '数据管理', path: "/project/:id/data" }
+      activity: { name: 'Activity', path: "/project/:id/activity" },
+      interface: { name: 'API', path: "/project/:id/interface/:action" },
+      setting: { name: 'Setting', path: "/project/:id/setting" },
+      members: { name: 'Members', path: "/project/:id/members" },
+      data: { name: 'Data', path: "/project/:id/data" }
     }
 
     let key, defaultName;
@@ -74,7 +74,7 @@ export default class Project extends Component {
         break;
       }
     }
-    
+
     let subnavData = [{
       name: routers.interface.name,
       path: `/project/${match.params.id}/interface/api`
@@ -93,7 +93,7 @@ export default class Project extends Component {
     }];
     if (this.props.currGroup.type === 'private') {
       subnavData = subnavData.filter(item => {
-        return item.name != '成员管理'
+        return item.name != 'Members'
       })
     }
 

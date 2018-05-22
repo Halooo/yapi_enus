@@ -54,7 +54,7 @@ class InterfaceList extends Component {
     catTableList: PropTypes.array,
     totalCount: PropTypes.number,
     count: PropTypes.number
-    
+
   }
 
   handleRequest = async (props) => {
@@ -98,25 +98,25 @@ class InterfaceList extends Component {
 
   componentWillReceiveProps(nextProps) {
     let _actionId = nextProps.match.params.actionId;
-    
+
     if (this.actionId !== _actionId) {
       this.actionId = _actionId;
       this.setState({
         current: 1
       }, ()=>this.handleRequest(nextProps))
-      
-      
-    } 
-   
+
+
+    }
+
   }
 
   handleAddInterface = (data) => {
     data.project_id = this.props.curProject._id;
     axios.post('/api/interface/add', data).then((res) => {
       if (res.data.errcode !== 0) {
-        return message.error(`${res.data.errmsg}, 你可以在左侧的接口列表中对接口进行删改`);
+        return message.error(`${res.data.errmsg}, you can edit API in the API list to the left`);
       }
-      message.success('接口添加成功')
+      message.success('API added')
       let interfaceId = res.data.data._id;
       this.props.history.push("/project/" + data.project_id + "/interface/api/" + interfaceId)
       this.props.fetchInterfaceListMenu(data.project_id)
@@ -130,7 +130,7 @@ class InterfaceList extends Component {
     };
     let result = await axios.post('/api/interface/up', params);
     if (result.data.errcode === 0) {
-      message.success('修改成功');
+      message.success('Edit success');
       this.handleRequest(this.props);
       this.props.fetchInterfaceListMenu(this.props.curProject._id)
     } else {
@@ -145,7 +145,7 @@ class InterfaceList extends Component {
     };
     let result = await axios.post('/api/interface/up', params);
     if (result.data.errcode === 0) {
-      message.success('修改成功');
+      message.success('Edit success');
       this.handleRequest(this.props);
     } else {
       message.error(result.data.errmsg)
@@ -161,41 +161,41 @@ class InterfaceList extends Component {
   render() {
 
     const columns = [{
-      title: '接口名称',
+      title: 'API name',
       dataIndex: 'title',
       key: 'title',
       width: 30,
       render: (text, item) => {
         return (
           <Link to={"/project/" + item.project_id + "/interface/api/" + item._id} >
-            <span className="path">{text}</span>            
+            <span className="path">{text}</span>
           </Link>
         )
       }
     }, {
-      title: '接口路径',
+      title: 'API path',
       dataIndex: 'path',
       key: 'path',
       width: 50,
       render: (item, record) => {
-        
+
         const path = this.props.curProject.basepath + item;
         let methodColor = variable.METHOD_COLOR[record.method ? record.method.toLowerCase() : 'get'];
 
         return <div>
           <span style={{ color: methodColor.color, backgroundColor: methodColor.bac }} className="colValue">{record.method}</span>
-          <Tooltip title="开放接口" placement="topLeft"  >
+          <Tooltip title="Public API" placement="topLeft"  >
             <span>{record.api_opened && <Icon className="opened" type="eye-o"/>
                 }
             </span>
           </Tooltip>
-          <Tooltip title={path} placement="topLeft" overlayClassName="toolTip">  
+          <Tooltip title={path} placement="topLeft" overlayClassName="toolTip">
             <span className="path">{path}</span>
           </Tooltip>
         </div>
       }
     }, {
-      title: '接口分类',
+      title: 'API type',
       dataIndex: 'catid',
       key: 'catid',
       width: 18,
@@ -207,22 +207,22 @@ class InterfaceList extends Component {
         </Select>
       }
     }, {
-      title: '状态',
+      title: 'Status',
       dataIndex: 'status',
       key: 'status',
       width: 14,
       render: (text, record) => {
         const key = record.key;
         return <Select value={key + '-' + text} className="select" onChange={this.changeInterfaceStatus}>
-          <Option value={key + '-done'}><span className="tag-status done">已完成</span></Option>
-          <Option value={key + '-undone'}><span className="tag-status undone">未完成</span></Option>
+          <Option value={key + '-done'}><span className="tag-status done">Completed</span></Option>
+          <Option value={key + '-undone'}><span className="tag-status undone">Not completed</span></Option>
         </Select>
       },
       filters: [{
-        text: '已完成',
+        text: 'Completed',
         value: 'done'
       }, {
-        text: '未完成',
+        text: 'Not completed',
         value: 'undone'
       }],
       onFilter: (value, record) => record.status.indexOf(value) === 0
@@ -266,14 +266,14 @@ class InterfaceList extends Component {
       onChange: this.changePage
     }
 
-    
+
     const isDisabled = this.props.catList.length === 0
 
     return (
       <div style={{ padding: '24px' }}>
-        <h2 className="interface-title" style={{ display: 'inline-block', margin: 0 }}>{intername ? intername : '全部接口'}共 ({total}) 个</h2>
+        <h2 className="interface-title" style={{ display: 'inline-block', margin: 0 }}>{intername ? intername : 'All APIs'} total: ({total}) </h2>
 
-        <Button style={{ float: 'right' }} disabled={isDisabled} type="primary" onClick={() => this.setState({ visible: true })}>添加接口</Button>
+        <Button style={{ float: 'right' }} disabled={isDisabled} type="primary" onClick={() => this.setState({ visible: true })}>Add API</Button>
         <div >
           {desc &&
             <p style={{ marginTop: '10px' }}>{desc} </p>
@@ -287,7 +287,7 @@ class InterfaceList extends Component {
           dataSource={data}
         />
         {this.state.visible && <Modal
-          title="添加接口"
+          title="Add API"
           visible={this.state.visible}
           onCancel={() => this.setState({ 'visible': false })}
           footer={null}

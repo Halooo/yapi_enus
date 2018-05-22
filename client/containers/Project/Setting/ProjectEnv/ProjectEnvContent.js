@@ -36,13 +36,13 @@ class ProjectEnvContent extends Component {
                   name: c[0] ? c[0].trim() : '',
                   value: c[1] ? c[1].trim() : ''
                 })
-              }              
+              }
             })
-            
-            
+
+
           }
         }else header.unshift(item);
-        
+
       })
       return { header, cookie };
     } else {
@@ -144,7 +144,7 @@ class ProjectEnvContent extends Component {
                 style={{ width: '200px' }}
                 allowClear={true}
                 dataSource={constants.HTTP_REQUEST_HEADER}
-                placeholder="请输入header名称"
+                placeholder="Enter header name"
                 onChange={() => this.addHeader(item, index, 'header')}
                 filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
               />
@@ -157,7 +157,7 @@ class ProjectEnvContent extends Component {
               validateTrigger: ['onChange', 'onBlur'],
               initialValue: item.value || ''
             })(
-              <Input placeholder="请输入参数内容" style={{ width: '90%', marginRight: 8 }} />
+              <Input placeholder="Enter params" style={{ width: '90%', marginRight: 8 }} />
               )}
           </FormItem>
         </Col>
@@ -182,7 +182,7 @@ class ProjectEnvContent extends Component {
               initialValue: item.name || ''
             })(
               <Input
-                placeholder="请输入 Cookie Name" 
+                placeholder="Enter Cookie Name"
                 style={{ width: '200px' }}
                 onChange={() => this.addHeader(item, index, 'cookie')}
               />
@@ -195,7 +195,7 @@ class ProjectEnvContent extends Component {
               validateTrigger: ['onChange', 'onBlur'],
               initialValue: item.value || ''
             })(
-              <Input placeholder="请输入参数内容" style={{ width: '90%', marginRight: 8 }} />
+              <Input placeholder="Enter params" style={{ width: '90%', marginRight: 8 }} />
               )}
           </FormItem>
         </Col>
@@ -213,35 +213,35 @@ class ProjectEnvContent extends Component {
     const envTpl = (data) => {
       return (
         <div>
-          <h3 className="env-label">环境名称</h3>
+          <h3 className="env-label">Env name</h3>
           <FormItem
             required={false}
           >
             {getFieldDecorator('env.name', {
               validateTrigger: ['onChange', 'onBlur'],
-              initialValue: data.name === '新环境' ? '' : data.name || '',
+              initialValue: data.name === 'New env' ? '' : data.name || '',
               rules: [{
                 required: false,
                 whitespace: true,
                 validator(rule, value, callback) {
                   if (value) {
                     if (value.length === 0) {
-                      callback('请输入环境名称');
+                      callback('Enter env name');
                     } else if (!/\S/.test(value)) {
-                      callback('请输入环境名称');
+                      callback('Enter env name');
                     } else {
                       return callback();
                     }
                   } else {
-                    callback('请输入环境名称');
+                    callback('Enter env name');
                   }
                 }
               }]
             })(
-              <Input onChange={(e) => this.props.handleEnvInput(e.target.value)} placeholder="请输入环境名称" style={{ width: '90%', marginRight: 8 }} />
+              <Input onChange={(e) => this.props.handleEnvInput(e.target.value)} placeholder="Enter env name" style={{ width: '90%', marginRight: 8 }} />
               )}
           </FormItem>
-          <h3 className="env-label">环境域名</h3>
+          <h3 className="env-label">Env Domain</h3>
           <FormItem
             required={false}
           >
@@ -254,19 +254,19 @@ class ProjectEnvContent extends Component {
                 validator(rule, value, callback) {
                   if (value) {
                     if (value.length === 0) {
-                      callback('请输入环境域名!');
+                      callback('Enter env domain!');
                     } else if (/\s/.test(value)) {
-                      callback('环境域名不允许出现空格!');
+                      callback('no space in the domain!');
                     } else {
                       return callback();
                     }
                   } else {
-                    callback('请输入环境域名!');
+                    callback('Enter env domain!');
                   }
                 }
               }]
             })(
-              <Input placeholder="请输入环境域名" style={{ width: '90%', marginRight: 8 }} addonBefore={
+              <Input placeholder="Enter env domain" style={{ width: '90%', marginRight: 8 }} addonBefore={
                 getFieldDecorator('env.protocol', {
                   initialValue: data.domain ? data.domain.split('\/\/')[0] + '\/\/' : 'http\:\/\/',
                   rules: [{
@@ -299,7 +299,7 @@ class ProjectEnvContent extends Component {
       <div>
         {envTpl(projectMsg)}
         <div className="btnwrap-changeproject">
-          <Button className="m-btn btn-save" icon="save" type="primary" size="large" onClick={this.handleOk} >保 存</Button>
+          <Button className="m-btn btn-save" icon="save" type="primary" size="large" onClick={this.handleOk} >Save</Button>
         </div>
       </div>
     )
