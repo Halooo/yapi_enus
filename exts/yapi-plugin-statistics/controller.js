@@ -76,7 +76,7 @@ class statisMockController extends baseController {
       mail = await this.checkEmail();
       // return ctx.body = yapi.commons.resReturn(result);
     } else {
-      mail = '未配置'
+      mail = 'Not Configured'
     }
 
     let load = await this.cupLoad()*100;
@@ -85,7 +85,7 @@ class statisMockController extends baseController {
     let totalmem = commons.transformBytesToGB(os.totalmem());
     let freemem = commons.transformBytesToGB(os.freemem());
     let uptime = commons.transformSecondsToDay(os.uptime());
-    
+
     let data = {
       mail,
       systemName,
@@ -104,10 +104,10 @@ class statisMockController extends baseController {
       let result = {}
       yapi.mail.verify((error) => {
         if (error) {
-          result = '不可用';
+          result = 'Not available';
           resolve(result)
         } else {
-          result = '可用';
+          result = 'Available';
           resolve(result)
         }
       })
@@ -117,7 +117,7 @@ class statisMockController extends baseController {
   async groupDataStatis(ctx){
     let groupData = await this.groupModel.list();
     let result = []
-    for(let i=0; i< groupData.length; i++){      
+    for(let i=0; i< groupData.length; i++){
       let group = groupData[i];
       let groupId = group._id;
       const data = {
