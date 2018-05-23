@@ -1,3 +1,36 @@
+# Hao's notes
+
+* nodejs（7.6+)
+* mongodb（2.6+）
+
+1. Create a new folder call it `my-yapi` (or other names you prefer), clone this repository under this folder.
+2. Copy `config_example.json` and paste it under `/my-yapi`
+3. rename it to `config.json` and edit the configuration to suite your needs
+
+`npm install -g ykit`
+
+to build the front-end code, first navigate to `/vendors`, then
+
+```shell
+npm run build-client
+```
+
+after building client, start the server and run
+
+```shell
+node server/app.js
+```
+
+or
+
+```shell
+npm run start
+```
+
+the server starts default on 3000 port (127.0.0.1:3000), this can be changed in `config.json` file
+
+
+
 ## YApi  可视化接口管理平台
 <p><a target="_blank" href="http://yapi.demo.qunar.com">yapi.demo.qunar.com</a></p>
 
