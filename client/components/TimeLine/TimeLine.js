@@ -63,24 +63,24 @@ function timeago(timestamp) {
   }
   minutes = parseInt(seconds / 60);
   if (year > 0) {
-    return year + "years ago";
+    return year + "yrs";
   } else if (mouth > 0 && year <= 0) {
-    return mouth + "months ago";
+    return mouth + "mths";
   } else if (days > 0 && mouth <= 0) {
-    return days + "days ago";
+    return days + "days";
   } else if (days <= 0 && hours > 0) {
-    return hours + "hours ago";
+    return hours + "hrs";
   } else if (hours <= 0 && minutes > 0) {
-    return minutes + "minutes ago";
+    return minutes + "mins";
   } else if (minutes <= 0 && seconds > 0) {
     if (seconds < 30) {
-      return "just now";
+      return "now";
     } else {
-      return seconds + "seconds ago";
+      return seconds + "s";
     }
 
   } else {
-    return "just now";
+    return "now";
   }
 }
 // timeago(new Date().getTime() - 40);
