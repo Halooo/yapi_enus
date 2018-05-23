@@ -62,7 +62,7 @@ class logController extends baseController {
         projectLogList.forEach((item, index) => {
           item = item.toObject();
           if (item.type === 'project') {
-            item.content = `在 <a href="/project/${item.typeid}">${projectDatas[item.typeid].name}</a> 项目: ` + item.content;
+            item.content = `in <a href="/project/${item.typeid}">${projectDatas[item.typeid].name}</a> Project: ` + item.content;
           }
           projectLogList[index] = item;
         })
@@ -104,7 +104,7 @@ class logController extends baseController {
       let list = []
       let projectDatas = await this.projectModel.getBaseInfo(typeid, 'basepath');
       let basePath = projectDatas.toObject().basepath
-      
+
 
       for (let i = 0; i < apis.length; i++) {
         let api = apis[i];
@@ -112,7 +112,7 @@ class logController extends baseController {
           api.path = api.path.indexOf(basePath) === 0 ? api.path.substr(basePath.length) : api.path;
         }
         let interfaceIdList = await this.interfaceModel.getByPath(typeid, api.path, api.method, '_id');
-       
+
         for (let j = 0; j < interfaceIdList.length; j++) {
           let interfaceId = interfaceIdList[j];
           let id = interfaceId.id

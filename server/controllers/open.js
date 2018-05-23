@@ -37,7 +37,7 @@ class openController extends baseController{
       runAutoTest: {
         '*id': 'number',
         'env_name': 'string',
-        'project_id': "string",  
+        'project_id': "string",
         'token': 'string',
         'mode' : {
           type: 'string',
@@ -98,10 +98,10 @@ class openController extends baseController{
       dataSync,
       (err)=>{
         errorMessage.push(err)
-      }, 
+      },
       (msg)=>{
-        successMessage = msg 
-      }, 
+        successMessage = msg
+      },
       ()=> {},
       token,
       yapi.WEBCONFIG.port
@@ -134,10 +134,10 @@ class openController extends baseController{
     let colData = await this.interfaceColModel.get(id);
     if(!colData){
       return ctx.body = yapi.commons.resReturn(null, 40022, 'id值不存在');
-    }    
-    
+    }
+
     let projectData = await this.projectModel.get(projectId);
-    
+
     let caseList = await yapi.commons.getCaseList(id);
     if(caseList.errcode !== 0){
       ctx.body = caseList
@@ -145,7 +145,7 @@ class openController extends baseController{
     caseList = caseList.data;
     for(let i=0, l= caseList.length; i< l; i++){
       let item = caseList[i];
-      
+
       item.id = item._id;
       item.case_env = curEnv || item.case_env;
       item.req_headers = this.handleReqHeader(item.req_headers, projectData.env, curEnv)
@@ -155,10 +155,10 @@ class openController extends baseController{
       let result;
       try{
         result = await this.handleTest(item);
-      }catch(err){        
+      }catch(err){
         result = err;
       }
-      
+
       reports[item.id] = result;
       records[item.id] = {
         params: result.params,
@@ -175,11 +175,11 @@ class openController extends baseController{
         else failedNum++;
       })
       if(failedNum === 0){
-        msg= `一共 ${len} 测试用例，全部验证通过`
+        msg= `Total ${len} test cases，all passed`
       } else{
-        msg= `一共 ${len} 测试用例，${successNum} 个验证通过， ${failedNum} 个未通过。`
+        msg= `total ${len} test cases，${successNum} passed， ${failedNum} did not pass。`
       }
-      
+
 
       return { msg, len, successNum, failedNum }
     }
@@ -198,17 +198,17 @@ class openController extends baseController{
     if (ctx.params.email === true && reportsResult.message.failedNum !== 0) {
       let autoTestUrl = `http://${ctx.request.host}/api/open/run_auto_test?id=${id}&token=${token}&mode=${ctx.params.mode}`
       this.sendNotice(projectId, {
-        title: `YApi自动化测试报告`,
+        title: `Automated test report`,
         content: `
         <html>
         <head>
-        <title>测试报告</title>
+        <title>Test Report</title>
         <meta charset="utf-8" />
         <body>
         <div>
-        <h3>测试结果：</h3>
+        <h3>Test result：</h3>
         <p>${reportsResult.message.msg}</p>
-        <h3>测试结果详情如下：</h3>
+        <h3>Test detail：</h3>
         <p>${autoTestUrl}</p>
         </div>
         </body>
@@ -238,7 +238,7 @@ class openController extends baseController{
     try {
       let data = await crossRequest(options, interfaceData.pre_script, interfaceData.after_script)
       let res= data.res;
-      
+
       result = Object.assign(
         result,
         {

@@ -98,7 +98,7 @@ class interfaceColController extends baseController {
       });
       let username = this.getUsername();
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 添加了接口集 <a href="/project/${params.project_id}/interface/col/${result._id}">${params.name}</a>`,
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> added API collection <a href="/project/${params.project_id}/interface/col/${result._id}">${params.name}</a>`,
         type: 'project',
         uid: this.getUid(),
         username: username,
@@ -128,7 +128,7 @@ class interfaceColController extends baseController {
       if (!id || id == 0) {
         return ctx.body = yapi.commons.resReturn(null, 407, 'col_id不能为空')
       }
-      
+
       let colData = await this.colModel.get(id);
       let project = await this.projectModel.getBaseInfo(colData.project_id);
       if (project.project_type === 'private') {
@@ -279,7 +279,7 @@ class interfaceColController extends baseController {
 
       this.colModel.get(params.col_id).then((col) => {
         yapi.commons.saveLog({
-          content: `<a href="/user/profile/${this.getUid()}">${username}</a> 在接口集 <a href="/project/${params.project_id}/interface/col/${params.col_id}">${col.name}</a> 下添加了测试用例 <a href="/project/${params.project_id}/interface/case/${result._id}">${params.casename}</a>`,
+          content: `<a href="/user/profile/${this.getUid()}">${username}</a> added test case <a href="/project/${params.project_id}/interface/case/${result._id}">${params.casename}</a> in collection <a href="/project/${params.project_id}/interface/col/${params.col_id}">${col.name}</a>`,
           type: 'project',
           uid: this.getUid(),
           username: username,
@@ -339,7 +339,7 @@ class interfaceColController extends baseController {
         let username = this.getUsername();
         this.colModel.get(params.col_id).then((col) => {
           yapi.commons.saveLog({
-            content: `<a href="/user/profile/${this.getUid()}">${username}</a> 在接口集 <a href="/project/${params.project_id}/interface/col/${params.col_id}">${col.name}</a> 下导入了测试用例 <a href="/project/${params.project_id}/interface/case/${caseResultData._id}">${data.casename}</a>`,
+            content: `<a href="/user/profile/${this.getUid()}">${username}</a> imported test case <a href="/project/${params.project_id}/interface/case/${caseResultData._id}">${data.casename}</a> in API collection <a href="/project/${params.project_id}/interface/col/${params.col_id}">${col.name}</a>`,
             type: 'project',
             uid: this.getUid(),
             username: username,
@@ -510,7 +510,7 @@ class interfaceColController extends baseController {
       let username = this.getUsername();
       this.colModel.get(caseData.col_id).then((col) => {
         yapi.commons.saveLog({
-          content: `<a href="/user/profile/${this.getUid()}">${username}</a> 在接口集 <a href="/project/${caseData.project_id}/interface/col/${caseData.col_id}">${col.name}</a> 更新了测试用例 <a href="/project/${caseData.project_id}/interface/case/${params.id}">${params.casename || caseData.casename}</a>`,
+          content: `<a href="/user/profile/${this.getUid()}">${username}</a> updated test case <a href="/project/${caseData.project_id}/interface/case/${params.id}">${params.casename || caseData.casename}</a> in API collection <a href="/project/${caseData.project_id}/interface/col/${caseData.col_id}">${col.name}</a>`,
           type: 'project',
           uid: this.getUid(),
           username: username,
@@ -551,7 +551,7 @@ class interfaceColController extends baseController {
         return ctx.body = yapi.commons.resReturn(null, 400, '找不到对应的接口，请联系管理员')
       }
       data = data.toObject();
-      
+
       let projectData = await this.projectModel.getBaseInfo(data.project_id);
       result.path = projectData.basepath + data.path;
       result.method = data.method;
@@ -570,7 +570,7 @@ class interfaceColController extends baseController {
     }
   }
 
-  
+
 
   /**
    * 更新一个接口集name或描述
@@ -603,7 +603,7 @@ class interfaceColController extends baseController {
       let result = await this.colModel.up(id, params);
       let username = this.getUsername();
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 更新了接口集 <a href="/project/${colData.project_id}/interface/col/${id}">${colData.name}</a> 的信息`,
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> updated information of <a href="/project/${colData.project_id}/interface/col/${id}">${colData.name}</a> collection`,
         type: 'project',
         uid: this.getUid(),
         username: username,
@@ -711,7 +711,7 @@ class interfaceColController extends baseController {
       await this.caseModel.delByCol(id);
       let username = this.getUsername();
       yapi.commons.saveLog({
-        content: `<a href="/user/profile/${this.getUid()}">${username}</a> 删除了接口集 ${colData.name} 及其下面的接口`,
+        content: `<a href="/user/profile/${this.getUid()}">${username}</a> deleted API collection ${colData.name} and all APIs under it`,
         type: 'project',
         uid: this.getUid(),
         username: username,
@@ -748,7 +748,7 @@ class interfaceColController extends baseController {
       let username = this.getUsername();
       this.colModel.get(caseData.col_id).then((col) => {
         yapi.commons.saveLog({
-          content: `<a href="/user/profile/${this.getUid()}">${username}</a> 删除了接口集 <a href="/project/${caseData.project_id}/interface/col/${caseData.col_id}">${col.name}</a> 下的接口 ${caseData.casename}`,
+          content: `<a href="/user/profile/${this.getUid()}">${username}</a> deleted API collection <a href="/project/${caseData.project_id}/interface/col/${caseData.col_id}">${col.name}</a> and the case ${caseData.casename}`,
           type: 'project',
           uid: this.getUid(),
           username: username,

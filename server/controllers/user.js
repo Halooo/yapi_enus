@@ -120,13 +120,13 @@ class userController extends baseController {
   /**
    * ldap登录
    * @interface /user/login_by_ldap
-   * @method 
+   * @method
    * @category user
    * @foldnumber 10
    * @param {String} email email名称，不能为空
    * @param  {String} password 密码，不能为空
    * @returns {Object}
-   * 
+   *
    */
   async  getLdapAuth(ctx) {
     try {
@@ -181,7 +181,7 @@ class userController extends baseController {
         await this.handlePrivateGroup(user._id, username, email);
         yapi.commons.sendMail({
           to: email,
-          contents: `<h3>亲爱的用户：</h3><p>您好，感谢使用YApi平台，你的邮箱账号是：${email}</p>`
+          contents: `<h3>Dear user：</h3><p>Thank you for using YApi platform，your email address is：${email}</p>`
         });
       }
 
