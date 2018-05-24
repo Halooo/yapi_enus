@@ -158,7 +158,7 @@ class CaseDesForm extends Component {
         caseData.params = json5.parse(caseData.params)
       } catch (error) {
         console.log(error)
-        message.error('请求参数 json 格式有误，请修改')
+        message.error('request json format incorrect')
         return false;
       }
     }
@@ -200,7 +200,7 @@ class CaseDesForm extends Component {
                   {getFieldDecorator(`paramsArr[${index}].name`, { initialValue: item.name })(
                     <AutoComplete
                       dataSource={dataSource}
-                      placeholder="参数名称"
+                      placeholder="Param Name"
                       filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
                     />
                   )}
@@ -209,7 +209,7 @@ class CaseDesForm extends Component {
               <Col span={10}>
                 <FormItem>
                   {getFieldDecorator(`paramsArr[${index}].value`, { initialValue: item.value })(
-                    <Input placeholder="参数值" />
+                    <Input placeholder="Value" />
                   )}
                 </FormItem>
               </Col>
@@ -243,7 +243,7 @@ class CaseDesForm extends Component {
                   {getFieldDecorator(`headers[${index}].name`, { initialValue: item.name })(
                     <AutoComplete
                       dataSource={dataSource}
-                      placeholder="参数名称"
+                      placeholder="Param Name"
                       filterOption={(inputValue, option) => option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
                     />
                   )}
@@ -252,7 +252,7 @@ class CaseDesForm extends Component {
               <Col span={10}>
                 <FormItem>
                   {getFieldDecorator(`headers[${index}].value`, { initialValue: item.value })(
-                    <Input placeholder="参数值" />
+                    <Input placeholder="Value" />
                   )}
                 </FormItem>
               </Col>
@@ -272,7 +272,7 @@ class CaseDesForm extends Component {
     }
     return (
       <Modal
-        title={isAdd ? '添加期望' : '编辑期望'}
+        title={isAdd ? 'Add Expect' : 'Edit Expect'}
         visible={visible}
         maskClosable={false}
         onOk={this.handleOk}
@@ -282,16 +282,16 @@ class CaseDesForm extends Component {
         className="case-des-modal"
       >
         <Form onSubmit={this.handleOk}>
-          <h2 className="sub-title" style={{ marginTop: 0 }}>基本信息</h2>
+          <h2 className="sub-title" style={{ marginTop: 0 }}>Basic Info</h2>
           <FormItem
               {...formItemLayout}
-              label="期望名称"
+              label="Expect Name"
           >
             {getFieldDecorator('name', {
               initialValue: name,
-              rules: [{ required: true, message: '请输入期望名称！' }]
+              rules: [{ required: true, message: 'Please enter name for Expect！' }]
             })(
-              <Input placeholder="请输入期望名称" />
+              <Input placeholder="Enter name" />
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="IP 过滤" className="ip-filter">
@@ -311,9 +311,9 @@ class CaseDesForm extends Component {
                 <FormItem>
                   {getFieldDecorator('ip' ,getFieldValue('ip_enable') ? {
                     initialValue: ip,
-                    rules: [{ pattern: constants.IP_REGEXP, message: '请填写正确的 IP 地址', required: true }]
+                    rules: [{ pattern: constants.IP_REGEXP, message: 'Please enter correct IP address', required: true }]
                   } : {})(
-                    <Input placeholder="请输入过滤的 IP 地址" />
+                    <Input placeholder="Enter filtered IP address" />
                   )}
                 </FormItem>
               </div>
@@ -333,14 +333,14 @@ class CaseDesForm extends Component {
             </Col>
           </Row>
           {
-            valuesTpl(paramsArr, '参数过滤')
+            valuesTpl(paramsArr, 'Param filter')
           }
           <FormItem wrapperCol={{ span: 6, offset: 5 }} style={{ display: paramsForm === 'form' ? '' : 'none' }}>
             <Button size="default" type="primary" onClick={() => this.addValues('paramsArr')} style={{ width: '100%' }}>
-              <Icon type="plus" /> 添加参数
+              <Icon type="plus" /> Add Param
             </Button>
           </FormItem>
-          <FormItem {...formItemLayout} wrapperCol={{ span: 17 }} label="参数过滤" style={{ display: paramsForm === 'form' ? 'none' : '' }}>
+          <FormItem {...formItemLayout} wrapperCol={{ span: 17 }} label="Param filter" style={{ display: paramsForm === 'form' ? 'none' : '' }}>
             <AceEditor
               className="pretty-editor"
               data={params}
@@ -349,13 +349,13 @@ class CaseDesForm extends Component {
             <FormItem
             >
               {getFieldDecorator('params', paramsForm === 'json' ? {
-                  rules: [{ validator: this.jsonValidator, message: '请输入正确的 JSON 字符串！' }]
+                  rules: [{ validator: this.jsonValidator, message: 'Enter correct JSON string' }]
               } : {})(
                 <Input style={{ display: 'none' }} />
                 )}
             </FormItem>
           </FormItem>
-          <h2 className="sub-title">响应</h2>
+          <h2 className="sub-title">Response</h2>
           <FormItem
               {...formItemLayout}
               required
@@ -373,22 +373,22 @@ class CaseDesForm extends Component {
           </FormItem>
           <FormItem
             {...formItemLayout}
-            label="延时"
+            label="Time Delay"
           >
             {getFieldDecorator('delay', {
                 initialValue: delay,
-                rules: [{ required: true, message: '请输入延时时间！', type: 'integer' }]
+                rules: [{ required: true, message: 'Enter delay time', type: 'integer' }]
             })(
-              <InputNumber placeholder="请输入延时时间" min={0} />
+              <InputNumber placeholder="Delay time" min={0} />
               )}
             <span>ms</span>
           </FormItem>
           {
-            headersTpl(headers, 'HTTP 头')
+            headersTpl(headers, 'HTTP Header')
           }
           <FormItem wrapperCol={{ span: 6, offset: 5 }}>
             <Button size="default" type="primary" onClick={() => this.addValues('headers')} style={{ width: '100%' }}>
-              <Icon type="plus" /> 添加 HTTP 头
+              <Icon type="plus" /> Add HTTP Header
             </Button>
           </FormItem>
           <FormItem {...formItemLayout} wrapperCol={{ span: 17 }} label="Body" required>

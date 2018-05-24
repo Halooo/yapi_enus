@@ -105,17 +105,17 @@ class AdvMock extends Component {
     return <div style={{ padding: '20px 10px' }}>
       <div style={{textAlign: 'center', marginBottom: 20}}>
         <Radio.Group value={tab} size="large" onChange={this.handleTapChange}>
-          <Radio.Button value="case">期望</Radio.Button>
-          <Radio.Button value="script">脚本</Radio.Button>
+          <Radio.Button value="case">Case</Radio.Button>
+          <Radio.Button value="script">Script</Radio.Button>
         </Radio.Group>
       </div>
       <div style={{display: isShowCase ? 'none' : ''}}>
         <Form onSubmit={this.handleSubmit}>
           <FormItem
-            label={<span>是否开启&nbsp;<a target="_blank" rel="noopener noreferrer"   href={constants.docHref.adv_mock_script} ><Tooltip title="点击查看文档"><Icon type="question-circle-o" /></Tooltip></a></span>}
+            label={<span>On,Off&nbsp;<a target="_blank" rel="noopener noreferrer"   href={constants.docHref.adv_mock_script} ><Tooltip title="点击查看文档"><Icon type="question-circle-o" /></Tooltip></a></span>}
             {...formItemLayout}
           >
-            <Switch checked={this.state.enable} onChange={this.onChange} checkedChildren="开" unCheckedChildren="关" />
+            <Switch checked={this.state.enable} onChange={this.onChange} checkedChildren="On" unCheckedChildren="Off" />
           </FormItem>
 
           <FormItem
