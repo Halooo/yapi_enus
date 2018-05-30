@@ -560,8 +560,8 @@ class interfaceController extends baseController {
     this.catModel.get(interfaceData.catid).then((cate) => {
       yapi.commons.saveLog({
         content: `<a href="/user/profile/${this.getUid()}">${username}</a> 
-                    更新了分类 <a href="/project/${cate.project_id}/interface/api/cat_${data.catid}">${cate.name}</a> 
-                    下的接口 <a href="/project/${cate.project_id}/interface/api/${id}">${interfaceData.title}</a><p>${params.message}</p>`,
+                    Updated <a href="/project/${cate.project_id}/interface/api/cat_${data.catid}">${cate.name}</a> 
+                    API: <a href="/project/${cate.project_id}/interface/api/${id}">${interfaceData.title}</a><p>${params.message}</p>`,
         type: 'project',
         uid: this.getUid(),
         username: username,
