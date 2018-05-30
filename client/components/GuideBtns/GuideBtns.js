@@ -39,7 +39,7 @@ class GuideBtns extends Component {
     return (
       <div className="btn-container">
         <Button className="btn" type="primary" onClick={this.nextStep}>{this.props.isLast ? 'Finish' : 'Next'}</Button>
-        <Button className="btn" type="dashed" onClick={this.exitGuide}>退出指引</Button>
+        <Button className="btn" type="dashed" onClick={this.exitGuide}>Skip Tutorial</Button>
       </div>
     )
   }
