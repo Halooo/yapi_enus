@@ -2,7 +2,7 @@ module.exports = {
   "title": "YApi API Management Platform",
   "keywords": "API Management, API Documentation",
   "author": "ymfe",
-  "description": "YApi is easy to use and improves your efficiency",
+  "description": "YApi is easy to use and improves your work efficiency",
   "plugins": ["search", "img-view"],
   "dist": "static/doc",
   "pluginsConfig": {

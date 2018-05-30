@@ -294,7 +294,7 @@ class CaseDesForm extends Component {
               <Input placeholder="Enter name" />
             )}
           </FormItem>
-          <FormItem {...formItemLayout} label="IP 过滤" className="ip-filter">
+          <FormItem {...formItemLayout} label="IP Filter" className="ip-filter">
             <Col span={6} className="ip-switch">
               <FormItem>
                 {getFieldDecorator('ip_enable', {

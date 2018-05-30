@@ -82,7 +82,7 @@ export default class MockCol extends Component {
     }
     await axios.post('/api/plugin/advmock/case/save', caseData).then(async res => {
       if (res.data.errcode === 0) {
-        message.success(this.state.isAdd ? '添加成功' : '保存成功');
+        message.success(this.state.isAdd ? 'Added' : 'Saved');
         await this.props.fetchMockCol(interface_id);
         this.setState({ caseDesModalVisible: false })
       } else {
@@ -95,7 +95,7 @@ export default class MockCol extends Component {
     const interface_id = this.props.match.params.actionId;
     await axios.post('/api/plugin/advmock/case/del', {id}).then(async res => {
       if (res.data.errcode === 0) {
-        message.success('删除成功');
+        message.success('Deleted');
         await this.props.fetchMockCol(interface_id);
       } else {
         message.error(res.data.errmsg);
@@ -137,7 +137,7 @@ export default class MockCol extends Component {
     })
     userFilters = Object.keys(Object.assign(userObj)).map(value => { return { text: value, value } })
     const columns = [{
-      title: '期望名称',
+      title: 'Name',
       dataIndex: 'name',
       key: 'name'
     }, {
@@ -153,18 +153,18 @@ export default class MockCol extends Component {
       onFilter: (value, record) => (record.ip === value && record.ip_enable) || (value === '无过滤' && !record.ip_enable),
       filters: ipFilters
     }, {
-      title: '创建人',
+      title: 'User',
       dataIndex: 'username',
       key: 'username',
       onFilter: (value, record) => record.username === value,
       filters: userFilters
     }, {
-      title: '编辑时间',
+      title: 'Up Time',
       dataIndex: 'up_time',
       key: 'up_time',
       render: text => formatTime(text)
     }, {
-      title: '操作',
+      title: 'Operation',
       dataIndex: '_id',
       key: '_id',
       render: (_id, recode) => {
@@ -172,16 +172,16 @@ export default class MockCol extends Component {
         return (!isGuest &&
           <div>
             <span style={{marginRight: 5}}>
-              <Button size="small" onClick={ this.openModal(recode) }>编辑</Button>
+              <Button size="small" onClick={ this.openModal(recode) }>Edit</Button>
             </span>
             <span>
               <Popconfirm
-                title="你确定要删除这条期望?"
+                title="Are you sure to delete?"
                 onConfirm={() => this.deleteCase(_id)}
-                okText="确定"
-                cancelText="取消"
+                okText="Yes"
+                cancelText="Cancel"
               >
-                <Button size="small" onClick={() => {}}>删除</Button>
+                <Button size="small" onClick={() => {}}>Delete</Button>
               </Popconfirm>
             </span>
           </div>
@@ -192,9 +192,9 @@ export default class MockCol extends Component {
     return (
       <div>
         <div style={{marginBottom: 8}}>
-          <Button type="primary" onClick={this.openModal(initCaseData, true)} disabled={isGuest}>添加期望</Button>
+          <Button type="primary" onClick={this.openModal(initCaseData, true)} disabled={isGuest}>Add Expect</Button>
           <a target="_blank" rel="noopener noreferrer" href={constants.docHref.adv_mock_case} style={{marginLeft: 8}} >
-            <Tooltip title="点击查看文档"><Icon type="question-circle-o" /></Tooltip>
+            <Tooltip title="Documentation"><Icon type="question-circle-o" /></Tooltip>
           </a>
         </div>
         <Table columns={columns} dataSource={data} pagination={false} rowKey='_id' />
