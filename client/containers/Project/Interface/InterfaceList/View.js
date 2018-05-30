@@ -325,8 +325,8 @@ class View extends Component {
       }
     ];
     let status = {
-      undone: 'Completed',
-      done: 'Not Completed'
+      undone: 'Not Completed',
+      done: 'Completed'
     };
 
     let bodyShow =
