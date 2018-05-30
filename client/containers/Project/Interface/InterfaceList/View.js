@@ -193,7 +193,7 @@ class View extends Component {
           name: item.name,
           value: item.desc,
           example: item.example,
-          required: item.required == 0 ? '否' : '是'
+          required: item.required == 0 ? 'No' : 'Yes'
         });
       });
     }
