@@ -13,8 +13,8 @@ import axios from 'axios';
 import formats from 'common/formats';
 const jSchema = require('json-schema-editor-visual');
 
-const ResBodySchema = jSchema({ lang: 'zh_CN', format: formats });
-const ReqBodySchema = jSchema({ lang: 'zh_CN' });
+const ResBodySchema = jSchema({ lang: 'en_US', format: formats });
+const ReqBodySchema = jSchema({ lang: 'en_US' });
 const TabPane = Tabs.TabPane;
 
 require('codemirror/lib/codemirror.css'); // codemirror
