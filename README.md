@@ -9,15 +9,19 @@
 ```shell
 mkdir my-yapi && cd my-yapi && git clone git@github.com:Halooo/yapi_enus.git
 ```
+- Install dependencies
+```shell
+npm install -g ykit
+npm install
+```
 - Copy `config_example.json` and paste it under `/my-yapi`, rename `config_example.json` to `config.json` and [edit the configuration](#sample-config-file) to suite your needs
 ```shell
 cp config_example.json ../ && mv ../config_example.json ../config.json
 ```
 - `mkdir log` under `/my-yapi`
 
-`npm install -g ykit`
 
-to build the front-end code, first navigate to `/vendors`, then
+to build the front-end code,
 
 ```shell
 npm run build-client
