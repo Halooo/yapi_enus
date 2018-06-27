@@ -22,8 +22,8 @@ class userController extends baseController {
    * @method POST
    * @category user
    * @foldnumber 10
-   * @param {String} email email名称，不能为空
-   * @param  {String} password 密码，不能为空
+   * @param {String} email email名称， cannot be empty
+   * @param  {String} password 密码， cannot be empty
    * @returns {Object}
    * @example ./api/user/login.json
    */
@@ -33,17 +33,17 @@ class userController extends baseController {
     let password = ctx.request.body.password;
 
     if (!email) {
-      return ctx.body = yapi.commons.resReturn(null, 400, 'email不能为空');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'email cannot be empty');
     }
     if (!password) {
-      return ctx.body = yapi.commons.resReturn(null, 400, '密码不能为空');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'password cannot be empty');
     }
 
     let result = await userInst.findByEmail(email);
 
 
     if (!result) {
-      return ctx.body = yapi.commons.resReturn(null, 404, '该用户不存在');
+      return ctx.body = yapi.commons.resReturn(null, 404, 'User does not exist');
     } else if (yapi.commons.generatePassword(password, result.passsalt) === result.password) {
       this.setLoginCookie(result._id, result.passsalt);
 
@@ -58,7 +58,7 @@ class userController extends baseController {
         study: result.study
       }, 0, 'logout success...');
     } else {
-      return ctx.body = yapi.commons.resReturn(null, 405, '密码错误');
+      return ctx.body = yapi.commons.resReturn(null, 405, 'Wrong Password');
     }
   }
 
@@ -123,8 +123,8 @@ class userController extends baseController {
    * @method
    * @category user
    * @foldnumber 10
-   * @param {String} email email名称，不能为空
-   * @param  {String} password 密码，不能为空
+   * @param {String} email email名称， cannot be empty
+   * @param  {String} password 密码， cannot be empty
    * @returns {Object}
    *
    */
@@ -209,26 +209,26 @@ class userController extends baseController {
     let userInst = yapi.getInst(userModel);
 
     if (!params.uid) {
-      return ctx.body = yapi.commons.resReturn(null, 400, 'uid不能为空');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'uid cannot be empty');
     }
 
     if (!params.password) {
-      return ctx.body = yapi.commons.resReturn(null, 400, '密码不能为空');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'password cannot be empty');
     }
 
     let user = await userInst.findById(params.uid);
     if (this.getRole() !== 'admin' && params.uid != this.getUid()) {
-      return ctx.body = yapi.commons.resReturn(null, 402, '没有权限');
+      return ctx.body = yapi.commons.resReturn(null, 402, 'No access right');
     }
 
     if (this.getRole() !== 'admin' || user.role === 'admin') {
       if (!params.old_password) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '旧密码不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'Old password cannot be empty');
       }
 
 
       if (yapi.commons.generatePassword(params.old_password, user.passsalt) !== user.password) {
-        return ctx.body = yapi.commons.resReturn(null, 402, '旧密码错误');
+        return ctx.body = yapi.commons.resReturn(null, 402, 'Old password incorrect');
       }
     }
 
@@ -277,8 +277,8 @@ class userController extends baseController {
    * @method POST
    * @category user
    * @foldnumber 10
-   * @param {String} email email名称，不能为空
-   * @param  {String} password 密码，不能为空
+   * @param {String} email email名称， cannot be empty
+   * @param  {String} password 密码， cannot be empty
    * @param {String} [username] 用户名
    * @returns {Object}
    * @example ./api/user/login.json
@@ -297,17 +297,17 @@ class userController extends baseController {
     });
 
     if (!params.email) {
-      return ctx.body = yapi.commons.resReturn(null, 400, '邮箱不能为空');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'email cannot be empty');
     }
 
     if (!params.password) {
-      return ctx.body = yapi.commons.resReturn(null, 400, '密码不能为空');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'password cannot be empty');
     }
 
     let checkRepeat = await userInst.checkRepeat(params.email);//然后检查是否已经存在该用户
 
     if (checkRepeat > 0) {
-      return ctx.body = yapi.commons.resReturn(null, 401, '该email已经注册');
+      return ctx.body = yapi.commons.resReturn(null, 401, 'emial has already been registered');
     }
 
     let passsalt = yapi.commons.randStr();
@@ -343,7 +343,7 @@ class userController extends baseController {
       });
       yapi.commons.sendMail({
         to: user.email,
-        contents: `<h3>亲爱的用户：</h3><p>您好，感谢使用YApi可视化接口平台,您的账号 ${params.email} 已经注册成功</p>`
+        contents: `<h3>Dear user,</h3><p>Thank you for using YApi your account: ${params.email} is ready to use</p>`
       });
     } catch (e) {
       ctx.body = yapi.commons.resReturn(null, 401, e.message);
@@ -395,13 +395,13 @@ class userController extends baseController {
       let id = ctx.request.query.id;
 
       if (!id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, 'uid不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'uid cannot be empty');
       }
 
       let result = await userInst.findById(id);
 
       if (!result) {
-        return ctx.body = yapi.commons.resReturn(null, 402, '不存在的用户');
+        return ctx.body = yapi.commons.resReturn(null, 402, 'user does not exist');
       }
 
       return ctx.body = yapi.commons.resReturn({
@@ -437,10 +437,10 @@ class userController extends baseController {
       let userInst = yapi.getInst(userModel);
       let id = ctx.request.body.id;
       if (id == this.getUid()) {
-        return ctx.body = yapi.commons.resReturn(null, 403, '禁止删除管理员');
+        return ctx.body = yapi.commons.resReturn(null, 403, 'Admin cannot be deleted');
       }
       if (!id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, 'uid不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'uid cannot be empty');
       }
 
       let result = await userInst.del(id);
@@ -474,19 +474,19 @@ class userController extends baseController {
       });
 
       if (this.getRole() !== 'admin' && params.uid != this.getUid()) {
-        return ctx.body = yapi.commons.resReturn(null, 401, '没有权限');
+        return ctx.body = yapi.commons.resReturn(null, 401, 'no access rights');
       }
 
       let userInst = yapi.getInst(userModel);
       let id = params.uid;
 
       if (!id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, 'uid不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'uid cannot be empty');
       }
 
       let userData = await userInst.findById(id);
       if (!userData) {
-        return ctx.body = yapi.commons.resReturn(null, 400, 'uid不存在');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'uid does not exist');
       }
 
       let data = {
@@ -499,7 +499,7 @@ class userController extends baseController {
       if (data.email) {
         var checkRepeat = await userInst.checkRepeat(data.email);//然后检查是否已经存在该用户
         if (checkRepeat > 0) {
-          return ctx.body = yapi.commons.resReturn(null, 401, '该email已经注册');
+          return ctx.body = yapi.commons.resReturn(null, 401, 'email has been registered');
         }
       }
 
@@ -534,7 +534,7 @@ class userController extends baseController {
     try {
       let basecode = ctx.request.body.basecode;
       if (!basecode) {
-        return ctx.body = yapi.commons.resReturn(null, 400, 'basecode不能为空')
+        return ctx.body = yapi.commons.resReturn(null, 400, 'basecode cannot be empty')
       }
       let pngPrefix = 'data:image/png;base64,';
       let jpegPrefix = 'data:image/jpeg;base64,';
@@ -546,11 +546,11 @@ class userController extends baseController {
         basecode = basecode.substr(jpegPrefix.length);
         type = 'image/jpeg';
       } else {
-        return ctx.body = yapi.commons.resReturn(null, 400, '仅支持jpeg和png格式的图片')
+        return ctx.body = yapi.commons.resReturn(null, 400, 'only jpeg and png pictures are allowed')
       }
       let strLength = basecode.length;
       if (parseInt(strLength - (strLength / 8) * 2) > 200000) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '图片大小不能超过200kb');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'picture size must be less than 200kb');
       }
 
       let avatarInst = yapi.getInst(avatarModel);
