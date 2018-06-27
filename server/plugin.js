@@ -10,7 +10,7 @@ var extConfig = require('../common/config.js').exts;
 var hooks = {
     /**
      * 第三方sso登录钩子，暂只支持设置一个
-     * @param ctx 
+     * @param ctx
      * @return 必需返回一个 promise 对象，resolve({username: '', email: ''})
      */
     'third_login': {
@@ -80,9 +80,9 @@ var hooks = {
      *  projectData: project,
         interfaceData: interfaceData,
         ctx: ctx,
-        mockJson: res 
+        mockJson: res
      * }
-     * 
+     *
      */
     'export_markdown': {
         type: 'multi',
@@ -95,9 +95,9 @@ var hooks = {
      *  projectData: project,
         interfaceData: interfaceData,
         ctx: ctx,
-        mockJson: res 
+        mockJson: res
      * }
-     * 
+     *
      */
     mock_after: {
         type: 'multi',
@@ -106,17 +106,17 @@ var hooks = {
     /**
      * 增加路由的钩子
      * type Sync
-     * @param addPluginRouter Function 
-     * @info 
+     * @param addPluginRouter Function
+     * @info
      * addPLuginPLugin(config)
-     * 
+     *
      * config = {
      *  path,      // String 路由名称
      *  method,    // String 请求方法 get post ...
      *  controller // Class 继承baseController的class
      *  action     // String controller的Action
      * }
-     * 
+     *
      * 示例：
      * config = {
      *  path:  "export/pdf",
@@ -132,17 +132,17 @@ var hooks = {
        /**
      * 增加websocket路由的钩子
      * type Sync
-     * @param addPluginRouter Function 
-     * @info 
+     * @param addPluginRouter Function
+     * @info
      * addPLuginPLugin(config)
-     * 
+     *
      * config = {
      *  path,      // String 路由名称
      *  method,    // String 请求方法 get post ...
      *  controller // Class 继承baseController的class
      *  action     // String controller的Action
      * }
-     * 
+     *
      * 示例：
      * config = {
      *  path:  "export/pdf",
@@ -165,7 +165,7 @@ var hooks = {
 function bindHook(name, listener) {
     if (!name) throw new Error('缺少hookname');
     if (name in hooks === false) {
-        throw new Error('不存在的hookname');
+        throw new Error(' does not exist hookname');
     }
     if (hooks[name].type === 'multi') {
         hooks[name].listener.push(listener);
@@ -179,9 +179,9 @@ function bindHook(name, listener) {
 }
 
 /**
- * 
+ *
  * @param {*} hookname
- * @return promise 
+ * @return promise
  */
 function emitHook(name) {
     if (hooks[name] && typeof hooks[name] === 'object') {

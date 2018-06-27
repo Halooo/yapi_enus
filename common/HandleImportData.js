@@ -3,7 +3,7 @@ const axios =require ('axios')
 const isNode = typeof global == 'object' && global.global === global;
 
 async function handle(
-  res,  
+  res,
   projectId,
   selectCatid,
   menuList,
@@ -25,7 +25,7 @@ async function handle(
         if (findCat) {
           cat.id = findCat._id;
         } else {
-          
+
           let apipath = "/api/interface/add_cat"
           if(isNode){
             apipath = 'http://127.0.0.1:' + port + apipath
@@ -118,7 +118,7 @@ async function handle(
           }
           if (result.data.errcode == 40033) {
             callback({ showLoading: false });
-            messageError("没有权限");
+            messageError("No access rights");
             break;
           }
         }
@@ -126,7 +126,7 @@ async function handle(
       if (count === len) {
         callback({ showLoading: false });
         messageSuccess(
-          `成功导入接口 ${successNum} 个, 已存在的接口 ${existNum} 个`
+          `成功导入接口 ${successNum} 个, API already exists ${existNum} 个`
         );
       }
     }

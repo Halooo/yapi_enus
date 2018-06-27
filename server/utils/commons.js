@@ -20,7 +20,7 @@ const ajv = new Ajv({
 var localize = require("ajv-i18n");
 const ejs = require("easy-json-schema");
 
-const jsf = require('json-schema-faker');  
+const jsf = require('json-schema-faker');
 const formats = require('../../common/formats')
 const defaultOptions = {
   failOnInvalidTypes: false,
@@ -37,7 +37,7 @@ formats.forEach(item=>{
   })
 })
 
-exports.schemaToJson = function(schema, options={}){  
+exports.schemaToJson = function(schema, options={}){
   Object.assign(options, defaultOptions)
   jsf.option(options);
   let result
@@ -55,7 +55,7 @@ exports.resReturn = (data, num, errmsg) => {
 
   return {
     errcode: num,
-    errmsg: errmsg || "成功！",
+    errmsg: errmsg || "Success！",
     data: data
   };
 };

@@ -114,7 +114,7 @@ module.exports = async (ctx, next) => {
   }
 
   if (!project) {
-    return (ctx.body = yapi.commons.resReturn(null, 400, "不存在的项目"));
+    return (ctx.body = yapi.commons.resReturn(null, 400, " does not exist 项目"));
   }
 
   let interfaceData, newpath;

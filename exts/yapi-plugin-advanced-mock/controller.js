@@ -28,7 +28,7 @@ class advMockController extends baseController{
       let auth = await this.checkAuth(params.project_id, 'project', 'edit')
       
       if (!auth) {
-        return ctx.body = yapi.commons.resReturn(null, 40033, '没有权限');
+        return ctx.body = yapi.commons.resReturn(null, 40033, 'No access rights');
       }
 
 

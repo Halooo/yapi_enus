@@ -31,7 +31,7 @@ class interfaceColController extends baseController {
       let project = await this.projectModel.getBaseInfo(id);
       if (project.project_type === 'private') {
         if (await this.checkAuth(project._id, 'project', 'view') !== true) {
-          return ctx.body = yapi.commons.resReturn(null, 406, '没有权限');
+          return ctx.body = yapi.commons.resReturn(null, 406, 'No access rights');
         }
       }
       let result = await this.colModel.list(id);
@@ -77,15 +77,15 @@ class interfaceColController extends baseController {
       });
 
       if (!params.project_id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'Project id cannot be empty');
       }
       if (!params.name) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '名称不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'name cannot be empty');
       }
 
       let auth = await this.checkAuth(params.project_id, 'project', 'edit')
       if (!auth) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '没有权限');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'No access rights');
       }
 
       let result = await this.colModel.save({
@@ -133,7 +133,7 @@ class interfaceColController extends baseController {
       let project = await this.projectModel.getBaseInfo(colData.project_id);
       if (project.project_type === 'private') {
         if (await this.checkAuth(project._id, 'project', 'view') !== true) {
-          return ctx.body = yapi.commons.resReturn(null, 406, '没有权限');
+          return ctx.body = yapi.commons.resReturn(null, 406, 'No access rights');
         }
       }
 
@@ -179,7 +179,7 @@ class interfaceColController extends baseController {
 
       if (project.project_type === 'private') {
         if (await this.checkAuth(project._id, 'project', 'view') !== true) {
-          return ctx.body = yapi.commons.resReturn(null, 406, '没有权限');
+          return ctx.body = yapi.commons.resReturn(null, 406, 'No access rights');
         }
       }
 
@@ -249,25 +249,25 @@ class interfaceColController extends baseController {
 
 
       if (!params.project_id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'Project id cannot be empty');
       }
 
       if (!params.interface_id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '接口id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'API id cannot be empty');
       }
 
       let auth = await this.checkAuth(params.project_id, 'project', 'edit');
       if (!auth) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '没有权限');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'No access rights');
       }
 
       if (!params.col_id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '接口集id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'API collection id cannot be empty');
       }
 
 
       if (!params.casename) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '用例名称不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'case name cannot be empty');
       }
 
       params.uid = this.getUid();
@@ -303,21 +303,21 @@ class interfaceColController extends baseController {
         col_id: 'number'
       });
       if (!params.interface_list || !Array.isArray(params.interface_list)) {
-        return ctx.body = yapi.commons.resReturn(null, 400, 'interface_list 参数有误');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'interface_list param incorrect');
       }
 
       if (!params.project_id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'Project id cannot be empty');
       }
 
       let auth = await this.checkAuth(params.project_id, 'project', 'edit');
       if (!auth) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '没有权限');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'No access rights');
       }
 
 
       if (!params.col_id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '接口集id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'API collection id cannot be empty');
       }
 
       let data = {
@@ -369,21 +369,21 @@ class interfaceColController extends baseController {
       const { project_id, col_id, new_col_id } = params;
 
       if (!project_id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '项目id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'Project id cannot be empty');
       }
 
       let auth = await this.checkAuth(params.project_id, 'project', 'edit');
 
       if (!auth) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '没有权限');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'No access rights');
       }
 
       if (!col_id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '被克隆的接口集id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'API collection being cloned id cannot be empty');
       }
 
       if (!new_col_id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '克隆的接口集id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'Clone API collection id cannot be empty');
       }
 
 
@@ -492,13 +492,13 @@ class interfaceColController extends baseController {
       });
 
       if (!params.id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '用例id不能为空');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'id cannot be empty');
       }
 
       let caseData = await this.caseModel.get(params.id);
       let auth = await this.checkAuth(caseData.project_id, 'project', 'edit');
       if (!auth) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '没有权限');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'No access rights');
       }
 
       params.uid = this.getUid();
@@ -543,12 +543,12 @@ class interfaceColController extends baseController {
       let id = ctx.query.caseid;
       let result = await this.caseModel.get(id);
       if (!result) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '不存在的case');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'case does not exist');
       }
       result = result.toObject();
       let data = await this.interfaceModel.get(result.interface_id);
       if (!data) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '找不到对应的接口，请联系管理员')
+        return ctx.body = yapi.commons.resReturn(null, 400, 'Cannot find API, contact admin')
       }
       data = data.toObject();
 
@@ -589,15 +589,15 @@ class interfaceColController extends baseController {
       let params = ctx.request.body;
       let id = params.col_id;
       if (!id) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '缺少 col_id 参数');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'lack col_id param');
       }
       let colData = await this.colModel.get(id);
       if (!colData) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '不存在');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'does not exist');
       }
       let auth = await this.checkAuth(colData.project_id, 'project', 'edit')
       if (!auth) {
-        return ctx.body = yapi.commons.resReturn(null, 400, '没有权限');
+        return ctx.body = yapi.commons.resReturn(null, 400, 'No access rights');
       }
       delete params.col_id;
       let result = await this.colModel.up(id, params);
@@ -631,7 +631,7 @@ class interfaceColController extends baseController {
     try {
       let params = ctx.request.body;
       if (!params || !Array.isArray(params)) {
-        ctx.body = yapi.commons.resReturn(null, 400, "请求参数必须是数组")
+        ctx.body = yapi.commons.resReturn(null, 400, "request param must be array")
       }
       params.forEach((item) => {
         if (item.id) {
@@ -642,7 +642,7 @@ class interfaceColController extends baseController {
 
       });
 
-      return ctx.body = yapi.commons.resReturn('成功！')
+      return ctx.body = yapi.commons.resReturn('Success！')
     } catch (e) {
       ctx.body = yapi.commons.resReturn(null, 400, e.message)
     }
@@ -664,7 +664,7 @@ class interfaceColController extends baseController {
     try {
       let params = ctx.request.body;
       if (!params || !Array.isArray(params)) {
-        ctx.body = yapi.commons.resReturn(null, 400, "请求参数必须是数组")
+        ctx.body = yapi.commons.resReturn(null, 400, "request param must be array")
       }
       params.forEach((item) => {
         if (item.id) {
@@ -675,7 +675,7 @@ class interfaceColController extends baseController {
 
       });
 
-      return ctx.body = yapi.commons.resReturn('成功！')
+      return ctx.body = yapi.commons.resReturn('Success！')
     } catch (e) {
       ctx.body = yapi.commons.resReturn(null, 400, e.message)
     }
@@ -698,13 +698,13 @@ class interfaceColController extends baseController {
       let id = ctx.query.col_id;
       let colData = await this.colModel.get(id);
       if (!colData) {
-        ctx.body = yapi.commons.resReturn(null, 400, "不存在的id")
+        ctx.body = yapi.commons.resReturn(null, 400, "id does not exist")
       }
 
       if (colData.uid !== this.getUid()) {
         let auth = await this.checkAuth(colData.project_id, 'project', 'danger')
         if (!auth) {
-          return ctx.body = yapi.commons.resReturn(null, 400, '没有权限');
+          return ctx.body = yapi.commons.resReturn(null, 400, 'No access rights');
         }
       }
       let result = await this.colModel.del(id);
@@ -733,13 +733,13 @@ class interfaceColController extends baseController {
       let caseid = ctx.query.caseid;
       let caseData = await this.caseModel.get(caseid);
       if (!caseData) {
-        ctx.body = yapi.commons.resReturn(null, 400, "不存在的caseid")
+        ctx.body = yapi.commons.resReturn(null, 400, "caseid does not exist")
       }
 
       if (caseData.uid !== this.getUid()) {
         let auth = await this.checkAuth(caseData.project_id, 'project', 'danger')
         if (!auth) {
-          return ctx.body = yapi.commons.resReturn(null, 400, '没有权限');
+          return ctx.body = yapi.commons.resReturn(null, 400, 'No access rights');
         }
       }
 

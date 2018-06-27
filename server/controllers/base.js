@@ -47,13 +47,13 @@ class baseController {
 
     let params = Object.assign({}, ctx.query, ctx.request.body)
     let token = params.token ;
-    
+
     if(token && openApiRouter.indexOf(ctx.path) > -1){
       if(this.$auth){
         ctx.params.project_id = await this.getProjectIdByToken(token)
         return this.$tokenAuth = true;
       }
-      
+
       let checkId = await this.getProjectIdByToken(token);
       let projectData = await this.projectModel.get(checkId);
       if(projectData) {
@@ -74,7 +74,7 @@ class baseController {
     let projectId = await this.tokenModel.findId(token);
     if(projectId) {
       return projectId.toObject().project_id
-    } 
+    }
   }
 
   getUid() {
@@ -96,7 +96,7 @@ class baseController {
       }catch(err){
         return false;
       }
-       
+
 
       if (decoded.uid == uid) {
         this.$uid = uid;
@@ -123,8 +123,8 @@ class baseController {
 
   }
   /**
-   * 
-   * @param {*} ctx 
+   *
+   * @param {*} ctx
    */
 
   async getLoginStatus(ctx) {
@@ -133,7 +133,7 @@ class baseController {
       let result = yapi.commons.fieldSelect(this.$user, ['_id', 'username', 'email', 'up_time', 'add_time', 'role', 'type', 'study']);
       body = yapi.commons.resReturn(result);
     } else {
-      body = yapi.commons.resReturn(null, 40011, '请登录...');
+      body = yapi.commons.resReturn(null, 40011, 'Please log in...');
     }
 
     body.ladp = await this.checkLDAP();
@@ -182,7 +182,7 @@ class baseController {
             return true;
           }
         })
-        
+
 
         if (memberData && memberData.role) {
           if (memberData.role === 'owner') {
@@ -205,7 +205,7 @@ class baseController {
           return 'owner';
         }
 
-        
+
         let groupMemberData = _.find(groupData.members, (m) => {
           if (m.uid === this.getUid()) {
             return true;
@@ -232,12 +232,12 @@ class baseController {
   /**
    * 身份验证
    * @param {*} id type对应的id
-   * @param {*} type enum[interface, project, group] 
+   * @param {*} type enum[interface, project, group]
    * @param {*} action enum[ danger, edit, view ] danger只有owner或管理员才能操作,edit只要是dev或以上就能执行
    */
   async checkAuth(id, type, action) {
     let role = await this.getProjectRole(id, type);
-    
+
     if (action === 'danger') {
       if (role === 'admin' || role === 'owner') {
         return true;

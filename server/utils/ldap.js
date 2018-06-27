@@ -57,7 +57,7 @@ exports.ldapQuery = (username, password) => {
             message: `searchReference: ${referral}`
           }
           reject(msg);
-          
+
         }
       });
       // 查询结束
@@ -73,14 +73,14 @@ exports.ldapQuery = (username, password) => {
             } else {
               let msg ={
                 type:true,
-                message: `验证成功`
+                message: `Success`
               }
               resolve(msg);
             }
             client.unbind();
           });
         } else {
-          
+
           let msg ={
             type:false,
             message: `用户名不存在`

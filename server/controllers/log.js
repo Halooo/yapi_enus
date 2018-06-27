@@ -45,10 +45,10 @@ class logController extends baseController {
       type = ctx.request.query.type,
       interfaceId = ctx.request.query.interface_id;
     if (!typeid) {
-      return ctx.body = yapi.commons.resReturn(null, 400, 'typeid不能为空');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'typeid cannot be empty');
     }
     if (!type) {
-      return ctx.body = yapi.commons.resReturn(null, 400, 'type不能为空');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'type cannot be empty');
     }
     try {
       if (type === "group") {

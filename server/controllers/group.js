@@ -125,7 +125,7 @@ class groupController extends baseController {
     let params = ctx.params;
 
     if (this.getRole() !== 'admin') {
-      return ctx.body = yapi.commons.resReturn(null, 401, '没有权限');
+      return ctx.body = yapi.commons.resReturn(null, 401, 'No access rights');
     }
 
     let owners = [];
@@ -145,7 +145,7 @@ class groupController extends baseController {
     let checkRepeat = await groupInst.checkRepeat(params.group_name);
 
     if (checkRepeat > 0) {
-      return ctx.body = yapi.commons.resReturn(null, 401, '项目分组名已存在');
+      return ctx.body = yapi.commons.resReturn(null, 401, 'Group name already exists');
     }
 
 
@@ -275,10 +275,10 @@ class groupController extends baseController {
 
     var check = await groupInst.checkMemberRepeat(params.id, params.member_uid);
     if (check === 0) {
-      return ctx.body = yapi.commons.resReturn(null, 400, '分组成员不存在');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'Group number does not exist');
     }
     if (await this.checkAuth(params.id, 'group', 'danger') !== true) {
-      return ctx.body = yapi.commons.resReturn(null, 405, '没有权限');
+      return ctx.body = yapi.commons.resReturn(null, 405, 'No access rights');
     }
 
     params.role = ['owner', 'dev', 'guest'].find(v => v === params.role) || 'dev';
@@ -334,10 +334,10 @@ class groupController extends baseController {
     let groupInst = yapi.getInst(groupModel);
     var check = await groupInst.checkMemberRepeat(params.id, params.member_uid);
     if (check === 0) {
-      return ctx.body = yapi.commons.resReturn(null, 400, '分组成员不存在');
+      return ctx.body = yapi.commons.resReturn(null, 400, 'Group number does not exist');
     }
     if (await this.checkAuth(params.id, 'group', 'danger') !== true) {
-      return ctx.body = yapi.commons.resReturn(null, 405, '没有权限');
+      return ctx.body = yapi.commons.resReturn(null, 405, 'No access rights');
     }
 
 
@@ -428,7 +428,7 @@ class groupController extends baseController {
    */
   async del(ctx) {
     if (this.getRole() !== 'admin') {
-      return ctx.body = yapi.commons.resReturn(null, 401, '没有权限');
+      return ctx.body = yapi.commons.resReturn(null, 401, 'No access rights');
     }
 
     let groupInst = yapi.getInst(groupModel);
@@ -471,7 +471,7 @@ class groupController extends baseController {
     let params = ctx.params;
 
     if (await this.checkAuth(params.id, 'group', 'danger') !== true) {
-      return ctx.body = yapi.commons.resReturn(null, 405, '没有权限');
+      return ctx.body = yapi.commons.resReturn(null, 405, 'No access rights');
     }
 
     let result = await groupInst.up(params.id, params);

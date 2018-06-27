@@ -37,7 +37,7 @@ class AdvMock extends Component {
     }
     axios.post('/api/plugin/advmock/save', params).then(res => {
       if (res.data.errcode === 0) {
-        message.success('保存成功');
+        message.success('保存Success');
       } else {
         message.error(res.data.errmsg);
       }

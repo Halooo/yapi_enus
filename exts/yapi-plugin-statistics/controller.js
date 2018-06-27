@@ -54,7 +54,7 @@ class statisMockController extends baseController {
     let mockDateList = [];
 
     if (!this.getRole() === 'admin') {
-      return ctx.body = yapi.commons.resReturn(null, 405, '没有权限');
+      return ctx.body = yapi.commons.resReturn(null, 405, 'No access rights');
     }
     //  默认时间是30 天为一周期
     let dateInterval = commons.getDateRange();

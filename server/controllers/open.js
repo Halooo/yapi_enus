@@ -70,16 +70,16 @@ class openController extends baseController{
     let dataSync = ctx.params.merge;
     let token = ctx.params.token;
     if(!type || !importDataModule[type]){
-      return ctx.body = yapi.commons.resReturn(null, 40022, '不存在的导入方式');
+      return ctx.body = yapi.commons.resReturn(null, 40022, 'Import type does not exist');
     }
 
     if(!content){
-      return ctx.body = yapi.commons.resReturn(null, 40022, 'json 不能为空');
+      return ctx.body = yapi.commons.resReturn(null, 40022, 'json cannot be empty');
     }
     try{
       content = JSON.parse(content)
     }catch(e){
-      return ctx.body = yapi.commons.resReturn(null, 40022, 'json 格式有误');
+      return ctx.body = yapi.commons.resReturn(null, 40022, 'json format error');
     }
 
     let menuList = await this.interfaceCatModel.list(project_id)
@@ -133,7 +133,7 @@ class openController extends baseController{
     let curEnv = ctx.params.env_name;
     let colData = await this.interfaceColModel.get(id);
     if(!colData){
-      return ctx.body = yapi.commons.resReturn(null, 40022, 'id值不存在');
+      return ctx.body = yapi.commons.resReturn(null, 40022, 'id does not exist');
     }
 
     let projectData = await this.projectModel.get(projectId);
@@ -313,7 +313,7 @@ class openController extends baseController{
         subject: data.title
       })
     } catch (e) {
-      yapi.commons.log('邮件发送失败：' + e, 'error')
+      yapi.commons.log('email send failed：' + e, 'error')
     }
 
   }
