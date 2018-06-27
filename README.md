@@ -3,9 +3,17 @@
 * nodejs（7.6+)
 * mongodb（2.6+）
 
-1. Create a new folder call it `my-yapi` (or other names you prefer), clone this repository under this folder.
-2. Copy `config_example.json` and paste it under `/my-yapi`, then `mkdir log` under '/my-api'
-3. rename `config_example.json` to `config.json` and [edit the configuration](#sample-config-file) to suite your needs
+## Get started
+
+- Create a new folder call it `my-yapi` (or other names you prefer), clone this repository under this folder.
+```shell
+mkdir my-yapi && cd my-yapi && git clone git@github.com:Halooo/yapi_enus.git
+```
+- Copy `config_example.json` and paste it under `/my-yapi`, rename `config_example.json` to `config.json` and [edit the configuration](#sample-config-file) to suite your needs
+```shell
+cp config_example.json ../ && mv ../config_example.json ../config.json
+```
+- `mkdir log` under `/my-yapi`
 
 `npm install -g ykit`
 
@@ -15,7 +23,7 @@ to build the front-end code, first navigate to `/vendors`, then
 npm run build-client
 ```
 
-after building client, start the server and run
+after building client, [configure mongoDB](#configure-mongodb) then start the server
 
 ```shell
 node server/app.js
